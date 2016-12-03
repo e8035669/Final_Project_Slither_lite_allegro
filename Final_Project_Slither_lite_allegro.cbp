@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="BodyStack.h" />
+		<Unit filename="Init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Init.h" />
 		<Unit filename="Map.c">
 			<Option compilerVar="CC" />
 		</Unit>

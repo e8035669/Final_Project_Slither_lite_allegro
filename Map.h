@@ -32,9 +32,11 @@ void deleteMap(Map* map);
 *   @return Lightspot
 *
 */
-LightSpot Create_LightSpot(void);
+LightSpot Create_LightSpot();
 
+LightSpot Create_LightSpot_xyc(int x,int y,int color);
 
+LightSpot Create_LightSpot_xy(int x,int y);
 /** @brief draw the lightspot
 *   @param map Map*
 *          snake Snake*
@@ -50,7 +52,9 @@ void Draw_LightSpot(Map *map,Snake *snake,ALLEGRO_BITMAP *lightspot);
 *          size int
 *   @return void
 */
-void Increase_LightSpotSize(Map *map,int size);
+void Increase_LightSpotSize(Map *map);
 
+void Put_LightSpot(Map* map,LightSpot lSp);
+void Eated_LightSpot(Map* map,int i);
 
 #endif // MAP_H

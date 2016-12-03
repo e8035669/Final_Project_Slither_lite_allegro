@@ -2,16 +2,17 @@
 #define STRUCTURES_H
 
 #include"kdebug/debug_c.h"
-
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_font.h>
 typedef struct Position {
 	double x;
 	double y;
-}Position;
+} Position;
 
 typedef struct Mouse {
-	int x;
-	int y;
-}Mouse;
+	double x;
+	double y;
+} Mouse;
 
 typedef struct Body {
 	struct Body* prev;
@@ -19,10 +20,10 @@ typedef struct Body {
 	int type;
 	int color;
 	Position current_position;
-//	Position next_position;
+	Position next_position;
 
 	struct Body* next;
-}Body;
+} Body;
 
 typedef struct Snake {
 	char name[20];
@@ -31,19 +32,21 @@ typedef struct Snake {
 	Body* tail;
 	Mouse mouse;
 	int isDead;
-}Snake;
+} Snake;
 
 typedef struct LightSpot {
 	int x;
 	int y;
 	int color;
-}LightSpot;
+} LightSpot;
 
 typedef struct Map {
 	LightSpot* lightSpot;
 	int lightSpotLength;
 	int lightSpotSize;
 	int size;
-}Map;
+} Map;
+
+
 
 #endif // STRUCTURES_H

@@ -7,7 +7,7 @@
 
 
 //load the 2D bitmap pointer , picture is in the file "bg"
-void My_Allegro_Load_Map(ALLEGRO_BITMAP ***bitmap);
+/*void My_Allegro_Load_Map(ALLEGRO_BITMAP ***bitmap);*/
 
 /*
 *  select=0 , return the picture number according to number
@@ -22,7 +22,7 @@ int Position_To_Picture(int number,int select);                                 
 void Draw_Map(int x,int y,ALLEGRO_BITMAP ***bitmap);
 
 //destroy the 2D bitmap pointer
-void My_Allegro_Destroy_Map(ALLEGRO_BITMAP ***bitmap);
+/*void My_Allegro_Destroy_Map(ALLEGRO_BITMAP ***bitmap);*/
 
 
 //draw the map border

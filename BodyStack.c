@@ -33,17 +33,17 @@ int Body_push(Snake* snake,Body* body) {
 Body* Body_pop(Snake* snake) {
 	assert(snake && snake->tail);
 	Body* tmp = snake->tail;
-	if(tmp){
-		if(snake->tail->prev){
+	if(tmp) {
+		if(snake->tail->prev) {
 			snake->tail = snake->tail->prev;
 			snake->tail->next = NULL;
-		}else{
+		} else {
 			snake->head = NULL;
 			snake->tail = NULL;
 		}
 		tmp->prev = NULL;
 		return tmp;
-	}else{
+	} else {
 		return NULL;
 	}
 }
@@ -64,11 +64,11 @@ int Snake_beLonger(Snake* snake) {
 int Snake_beShorter(Snake* snake) {
 //	if(snake->length<=INIT_LENGTH)return 0;
 	Body* tmp = Body_pop(snake);
-	if(tmp){
+	if(tmp) {
 		(snake->length)--;
 		free(tmp);
 		return 1;
-	}else{
+	} else {
 		return 0;
 	}
 
@@ -76,12 +76,12 @@ int Snake_beShorter(Snake* snake) {
 
 void Snake_lengthCheck(Snake* snake) {
 	int count = 1;
-    Body* thisBody = Body_getHead(snake);
-    Body* tail = Body_getTail(snake);
-    while(thisBody!=tail){
+	Body* thisBody = Body_getHead(snake);
+	Body* tail = Body_getTail(snake);
+	while(thisBody!=tail) {
 		if(count > snake->length+10)break;
 		thisBody = thisBody->next;
 		count++;
-    }
+	}
 	assert(count == snake->length);
 }
