@@ -32,7 +32,7 @@ void deleteMap(Map* map);
 *   @return Lightspot
 *
 */
-LightSpot Create_LightSpot();
+LightSpot Create_LightSpot(int mapSize);
 
 LightSpot Create_LightSpot_xyc(int x,int y,int color);
 
@@ -44,7 +44,7 @@ LightSpot Create_LightSpot_xy(int x,int y);
 *   @return void
 *
 */
-void Draw_LightSpot(Map *map,Snake *snake,ALLEGRO_BITMAP *lightspot);
+void Draw_LightSpot(Map *map,Snake *snake,ALLEGRO_BITMAP *lightspot,ALLEGRO_DISPLAY *display);
 
 
 /** @brief increase the map->lightSpotSize = "size"

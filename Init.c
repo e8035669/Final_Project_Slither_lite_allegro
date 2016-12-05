@@ -15,6 +15,7 @@ void init() {
 }
 
 void initResources() {
+	al_set_new_display_option(ALLEGRO_VSYNC,1,ALLEGRO_REQUIRE);
 	Res.display = al_create_display(800,600);
 	Res.pongFont = al_load_ttf_font("assets/ARCHRISTY.ttf", 70, 0);
 
@@ -44,7 +45,7 @@ void initResources() {
 
 	Res.snake_body = al_load_bitmap("assets/snake/snake_body.png");
 	Res.snake_head = al_load_bitmap("assets/snake/snake_head.png");
-	Res.lightspot = al_load_bitmap("assets/ball.bmp");
+	Res.lightspot = al_load_bitmap("assets/lightspot/lightspot.png");
 	Res.timer = al_create_timer(1.0/60.0);
 	Res.eventQueue = al_create_event_queue();
 	LOG("%-30s[OK]","Allegro Resource Loading");

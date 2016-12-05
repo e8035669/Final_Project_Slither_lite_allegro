@@ -58,6 +58,7 @@ int Snake_beLonger(Snake* snake) {
 
 	Body_push(snake,newBody);
 	(snake->length)++;
+	snake->picSize = Picture_Size(snake->length);
 	return 1;
 }
 
@@ -71,7 +72,7 @@ int Snake_beShorter(Snake* snake) {
 	} else {
 		return 0;
 	}
-
+	snake->picSize = Picture_Size(snake->length);
 }
 
 void Snake_lengthCheck(Snake* snake) {
@@ -84,4 +85,9 @@ void Snake_lengthCheck(Snake* snake) {
 		count++;
 	}
 	assert(count == snake->length);
+}
+
+
+int Picture_Size(int length) {
+	return (int)log10(length)*10+25;
 }

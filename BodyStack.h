@@ -52,4 +52,6 @@ int Snake_beShorter(Snake* snake);
  */
 void Snake_lengthCheck(Snake* snake);
 
+
+int Picture_Size(int length);
 #endif // BODYSTACK_H

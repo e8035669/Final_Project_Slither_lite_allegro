@@ -28,6 +28,7 @@ typedef struct Body {
 typedef struct Snake {
 	char name[20];
 	int length;
+	int picSize;
 	Body* head;
 	Body* tail;
 	Mouse mouse;

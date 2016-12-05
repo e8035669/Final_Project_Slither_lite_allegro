@@ -34,8 +34,8 @@ int main() {
 	al_register_event_source(Res.eventQueue,al_get_timer_event_source(Res.timer));
 
 	char name[20] = {0};
-	Snake* snake = createSnake(p(4000,4000),"default");
-	Map* map = createMap(MAP_SIZE);
+	Snake* snake = createSnake(p(5000,5000),"default");
+	Map* map = createMap(10000);
 
 	const int displayHalfWidth = al_get_display_width(Res.display)/2;
 	const int displayHalfHeight = al_get_display_height(Res.display)/2;
@@ -79,7 +79,7 @@ int main() {
 						}
 						break;
 					case ALLEGRO_EVENT_MOUSE_AXES:
-						if(abs(event.mouse.x-SCREEN_W/2)<90 && abs(event.mouse.y-SCREEN_H/2-120)<90) {
+						if(abs(event.mouse.x-displayHalfWidth)<90 && abs(event.mouse.y-displayHalfHeight-120)<90) {
 							isFocusOnPlay = 1;
 							isDisplayNeedRefresh = 1;
 						} else {
@@ -88,7 +88,7 @@ int main() {
 						}
 						break;
 					case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-						if(abs(event.mouse.x-SCREEN_W/2)<90 && abs(event.mouse.y-SCREEN_H/2-120)<90) {
+						if(abs(event.mouse.x-displayHalfWidth)<90 && abs(event.mouse.y-displayHalfHeight-120)<90) {
 							strcpy(snake->name,name);
 							gameState = Gameing;
 						}
@@ -103,12 +103,12 @@ int main() {
 							al_draw_scaled_bitmap(Res.start,0,0,al_get_bitmap_width(Res.start),al_get_bitmap_height(Res.start)
 												  ,0,0,al_get_display_width(Res.display),al_get_display_height(Res.display),0);
 							if(isFocusOnPlay) {
-								al_draw_bitmap(Res.start_button_blink,SCREEN_W/2-150,SCREEN_H/2, 0);
+								al_draw_bitmap(Res.start_button_blink,displayHalfWidth-150,displayHalfHeight, 0);
 							} else {
-								al_draw_bitmap(Res.start_button,SCREEN_W/2-150,SCREEN_H/2, 0);
+								al_draw_bitmap(Res.start_button,displayHalfWidth-150,displayHalfHeight, 0);
 							}
-							al_draw_textf( Res.pongFont, al_map_rgba(110, 239, 35,254), SCREEN_W/2, 100, ALLEGRO_ALIGN_CENTRE, "Enter your name:");
-							al_draw_textf(Res.pongFont,al_map_rgba(209,27,27,255),SCREEN_W/2,200,ALLEGRO_ALIGN_CENTRE,"%s",name);
+							al_draw_textf( Res.pongFont, al_map_rgba(110, 239, 35,254), displayHalfWidth, 100, ALLEGRO_ALIGN_CENTRE, "Enter your name:");
+							al_draw_textf(Res.pongFont,al_map_rgba(209,27,27,255),displayHalfWidth,200,ALLEGRO_ALIGN_CENTRE,"%s",name);
 							al_flip_display();
 						}
 				}
@@ -118,6 +118,7 @@ int main() {
 					case ALLEGRO_EVENT_MOUSE_AXES:
 						mouse = m(event.mouse.x-displayHalfWidth,
 								  event.mouse.y-displayHalfHeight);
+						//LOG("(%f,%f)",mouse.x,mouse.y);
 						break;
 					case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
 						isMouseBtnDown = 1;
@@ -138,9 +139,9 @@ int main() {
 
 						if(isDisplayNeedRefresh&&al_is_event_queue_empty(Res.eventQueue)) {
 							al_clear_to_color(al_map_rgb(0,0,0));
-							Draw_Map(Body_getHead(snake)->current_position.x,Body_getHead(snake)->current_position.y,Res.bitmap);
-							Draw_LightSpot(map,snake,Res.lightspot);
-							Draw_Snake(snake,Res.snake_body,Res.snake_head);
+							Draw_Map(snake->head->current_position.x,snake->head->current_position.y,Res.bitmap,Res.display,map);
+							Draw_LightSpot(map,snake,Res.lightspot,Res.display);
+							Draw_Snake(snake,Res.snake_body,Res.snake_head,Res.display);
 							al_flip_display();
 						}
 				}
