@@ -10,8 +10,8 @@ typedef struct Position {
 } Position;
 
 typedef struct Mouse {
-	double x;
-	double y;
+	int x;
+	int y;
 } Mouse;
 
 typedef struct Body {
@@ -20,7 +20,7 @@ typedef struct Body {
 	int type;
 	int color;
 	Position current_position;
-	Position next_position;
+//	Position next_position;
 
 	struct Body* next;
 } Body;
@@ -31,7 +31,7 @@ typedef struct Snake {
 	int picSize;
 	Body* head;
 	Body* tail;
-	Mouse mouse;
+	double headDirection;
 	int isDead;
 } Snake;
 

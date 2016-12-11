@@ -15,9 +15,12 @@ void init() {
 }
 
 void initResources() {
+	//al_set_new_display_refresh_rate(60);
 	al_set_new_display_option(ALLEGRO_VSYNC,1,ALLEGRO_REQUIRE);
+	al_set_new_display_flags(ALLEGRO_RESIZABLE);
 	Res.display = al_create_display(800,600);
 	Res.pongFont = al_load_ttf_font("assets/ARCHRISTY.ttf", 70, 0);
+	Res.builtinFont = al_create_builtin_font();
 
 	al_set_target_backbuffer(Res.display);
 	al_clear_to_color(al_map_rgb(96,96,96));
@@ -54,6 +57,7 @@ void initResources() {
 void destroy() {
 	al_destroy_display(Res.display);
 	al_destroy_font(Res.pongFont);
+	al_destroy_font(Res.builtinFont);
 	al_destroy_bitmap(Res.start);
 	al_destroy_bitmap(Res.start_button);
 	al_destroy_bitmap(Res.start_button_blink);

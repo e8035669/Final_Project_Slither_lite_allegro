@@ -2,10 +2,10 @@
 
 Snake* createSnake(Position position,char* name) {
 	Snake* snake = malloc(sizeof(Snake));
-	Mouse m = {1,1};
-	snake->mouse = m;
 	snake->length = 1;
 	snake->isDead = 0;
+	snake->headDirection = 0;
+	snake->picSize = 0;
 
 	Body* firstBody = malloc(sizeof(Body));
 	firstBody->color = 1;
@@ -40,22 +40,22 @@ void deleteSnake(Snake* snake) {
 void moveSnake(Snake* snake,Mouse cursor,double speed) {
 	Body* head = Body_getHead(snake);
 	Body* tail = Body_getTail(snake);
-	if((!cursor.x)&&(!cursor.y))(cursor.y)++;
-	double oldDegree = atan2(snake->mouse.y,snake->mouse.x);
+
 	double degree = atan2(cursor.y,cursor.x);
-	double tmp = degree-oldDegree;
+	double tmp = degree-snake->headDirection;
 	if(tmp>M_PI)tmp-=(M_PI*2.0);
 	if(tmp<-M_PI)tmp+=(M_PI*2.0);
 	const double threshold = 0.06;
 	if(tmp > threshold){
-        degree = oldDegree + threshold;
+        snake->headDirection += threshold;
 	}else if(tmp < -threshold){
-		degree = oldDegree - threshold;
+		snake->headDirection -=  threshold;
+	}else{
+		snake->headDirection = degree;
 	}
-    snake->mouse.x = cos(degree)*speed;
-    snake->mouse.y = sin(degree)*speed;
-	head->current_position.x += snake->mouse.x;
-	head->current_position.y += snake->mouse.y;
+
+	head->current_position.x += (cos(snake->headDirection)*speed);
+	head->current_position.y += (sin(snake->headDirection)*speed);
 
 	while(head!=tail){
 		if(head->next){

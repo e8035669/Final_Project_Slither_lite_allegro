@@ -89,5 +89,5 @@ void Snake_lengthCheck(Snake* snake) {
 
 
 int Picture_Size(int length) {
-	return (int)log10(length)*10+25;
+	return (int)(log10(length)*10.0)+25;
 }

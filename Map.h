@@ -1,9 +1,11 @@
 #ifndef MAP_H
 #define MAP_H
 #include <stdlib.h>
+#include <math.h>
 #include "define.h"
 #include "Structures.h"
 #include "draw_map.h"
+#include "Snake.h"
 #include <allegro5/allegro.h>
 
 #define TOTAL_COLOR 5
@@ -32,6 +34,12 @@ void deleteMap(Map* map);
 *   @return Lightspot
 *
 */
+/** @brief 建立新的lightspot
+ *
+ * @param mapSize int
+ * @return LightSpot
+ *
+ */
 LightSpot Create_LightSpot(int mapSize);
 
 LightSpot Create_LightSpot_xyc(int x,int y,int color);
@@ -52,9 +60,34 @@ void Draw_LightSpot(Map *map,Snake *snake,ALLEGRO_BITMAP *lightspot,ALLEGRO_DISP
 *          size int
 *   @return void
 */
-void Increase_LightSpotSize(Map *map);
+//void Increase_LightSpotSize(Map *map);
 
+/** @brief 新增這個lightspot到地圖上
+ *
+ * @param map Map*
+ * @param lSp LightSpot
+ * @return void
+ *
+ */
 void Put_LightSpot(Map* map,LightSpot lSp);
+
+/** @brief 移除(吃)掉某一個lightspot
+ *
+ * @param map Map*
+ * @param i int
+ * @return void
+ *
+ */
 void Eated_LightSpot(Map* map,int i);
+
+/** @brief 探測附近有沒有lightspot
+ * 有的話就會吸過來吃掉
+ * @param Body_getHead Body*
+ * @param map Map*
+ * @param snake Snake*
+ * @return void
+ *
+ */
+void detectLightSpot(Body* Body_getHead, Map* map,Snake* snake);
 
 #endif // MAP_H
