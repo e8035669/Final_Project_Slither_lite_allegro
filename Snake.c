@@ -46,33 +46,44 @@ void moveSnake(Snake* snake,Mouse cursor,double speed) {
 	if(tmp>M_PI)tmp-=(M_PI*2.0);
 	if(tmp<-M_PI)tmp+=(M_PI*2.0);
 	const double threshold = 0.06;
-	if(tmp > threshold){
-        snake->headDirection += threshold;
-	}else if(tmp < -threshold){
+	if(tmp > threshold) {
+		snake->headDirection += threshold;
+	} else if(tmp < -threshold) {
 		snake->headDirection -=  threshold;
-	}else{
+	} else {
 		snake->headDirection = degree;
 	}
 
 	head->current_position.x += (cos(snake->headDirection)*speed);
 	head->current_position.y += (sin(snake->headDirection)*speed);
 
-	while(head!=tail){
-		if(head->next){
+	while(head!=tail) {
+		if(head->next) {
 			Position p1 = head->current_position;
 			Position p2 = head->next->current_position;
 			head->next->current_position.x += ((p1.x - p2.x)*0.3);
 			head->next->current_position.y += ((p1.y - p2.y)*0.3);
-			}
+		}
 		head = head->next;
 	}
-/*
-	while(tail!=head) {
-		tail->current_position = tail->prev->current_position;
-		tail = tail->prev;
+	/*
+		while(tail!=head) {
+			tail->current_position = tail->prev->current_position;
+			tail = tail->prev;
+		}
+		if((!cursor.x)&&(!cursor.y))(cursor.y)++;
+		double distance = sqrt(cursor.x*cursor.x+cursor.y*cursor.y);
+		head->current_position.x += (cursor.x * speed/distance);
+		head->current_position.y += (cursor.y * speed/distance);*/
+}
+
+void aiSnakes(Snake* snakes[]) {
+	int i;
+	for(i=1; i<Ainumbers; i++) {
+		char Ainame[5]= "";
+		sprintf(Ainame,"%d",i);
+		int x=rand()%10000;
+		int y=rand()%10000;
+		snakes[i]=createSnake(p(x,y),Ainame);
 	}
-	if((!cursor.x)&&(!cursor.y))(cursor.y)++;
-	double distance = sqrt(cursor.x*cursor.x+cursor.y*cursor.y);
-	head->current_position.x += (cursor.x * speed/distance);
-	head->current_position.y += (cursor.y * speed/distance);*/
 }

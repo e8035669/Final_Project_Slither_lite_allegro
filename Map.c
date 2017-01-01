@@ -3,11 +3,11 @@
 Map* createMap(int mapSize) {
 	int i;
 	Map* map = malloc(sizeof(Map));
-	map->lightSpot = (LightSpot *)malloc(sizeof(LightSpot)*16384);
-	map->lightSpotSize = 16384;
+	map->lightSpot = (LightSpot *)malloc(sizeof(LightSpot)*8192);
+	map->lightSpotSize = 8192;
 	map->size = mapSize;
-	map->lightSpotLength = 8192;
-	for(i=0; i<8192; i++) {
+	map->lightSpotLength = 7000;
+	for(i=0; i<7000; i++) {
 		map->lightSpot[i]=Create_LightSpot(mapSize);
 	}
 	return map;
@@ -108,17 +108,21 @@ void detectLightSpot(Body* Body_getHead, Map* map,Snake* snake) {
 	double degree=0,distance=0;
 
 	for(i=0; i<map->lightSpotSize; i++) {
-		distance=sqrt(pow((Body_getHead->current_position.x-map->lightSpot[i].x),2)+pow((Body_getHead->current_position.y-map->lightSpot[i].y),2));
-		if(distance<snake->picSize+20&&map->lightSpot[i].color!=0) {
-			degree=atan2(map->lightSpot[i].y-Body_getHead->current_position.y,map->lightSpot[i].x-Body_getHead->current_position.x);
-			map->lightSpot[i].x-=cos(degree)*10;
-			map->lightSpot[i].y-=sin(degree)*10;
-			if(distance<snake->picSize) {
-				int j=0,color = map->lightSpot[i].color;
-				for(j=0;j<color;j++){
-					Snake_beLonger(snake);
+		if(map->lightSpot[i].color) {
+			int distX = map->lightSpot[i].x-Body_getHead->current_position.x;
+			int distY = map->lightSpot[i].y-Body_getHead->current_position.y;
+			distance=sqrt(distX*distX+distY*distY);
+			if(distance<snake->picSize+20) {
+				degree=atan2(distY,distX);
+				map->lightSpot[i].x-=cos(degree)*10;
+				map->lightSpot[i].y-=sin(degree)*10;
+				if(distance<snake->picSize) {
+					int j=0,color = map->lightSpot[i].color;
+					for(j=0; j<color; j++) {
+						Snake_beLonger(snake);
+					}
+					Eated_LightSpot(map,i);
 				}
-				Eated_LightSpot(map,i);
 			}
 		}
 	}

@@ -1,9 +1,11 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
+#define Ainumbers 100
 #define INIT_LENGTH 10
 #include "Structures.h"
 #include "BodyStack.h"
+#include "OtherFunctions.h"
 #include <stdlib.h>
 #include <math.h>
 #include <assert.h>
@@ -38,6 +40,6 @@ void deleteSnake(Snake* snake);
  */
 void moveSnake(Snake* snake,Mouse cursor,double speed);
 
-
+void aiSnakes(Snake* snakes[]);
 
 #endif // SNAKE_H

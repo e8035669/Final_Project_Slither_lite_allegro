@@ -26,6 +26,9 @@ void initResources() {
 	al_clear_to_color(al_map_rgb(96,96,96));
 	al_draw_text(Res.pongFont,al_map_rgb(220,220,220),al_get_display_width(Res.display)/2,
 				 al_get_display_height(Res.display)/2,ALLEGRO_ALIGN_CENTRE,"Loading...");
+	Res.icon=al_load_bitmap("assets/icon.png");
+	al_set_display_icon(Res.display,Res.icon);
+
 	al_flip_display();//Show loading screen
 
 	Res.start = al_load_bitmap( "assets/start.jpg");
@@ -51,6 +54,11 @@ void initResources() {
 	Res.lightspot = al_load_bitmap("assets/lightspot/lightspot.png");
 	Res.timer = al_create_timer(1.0/60.0);
 	Res.eventQueue = al_create_event_queue();
+	al_register_event_source(Res.eventQueue,al_get_display_event_source(Res.display));
+	al_register_event_source(Res.eventQueue,al_get_keyboard_event_source());
+	al_register_event_source(Res.eventQueue,al_get_mouse_event_source());
+	al_register_event_source(Res.eventQueue,al_get_timer_event_source(Res.timer));
+	al_start_timer(Res.timer);
 	LOG("%-30s[OK]","Allegro Resource Loading");
 }
 

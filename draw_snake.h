@@ -8,12 +8,10 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 
-//return the snake graph's size according to the length
-int Picture_Size(int length);
 
 //draw snake in the middle of screen
-void Draw_Snake(Snake *snake,ALLEGRO_BITMAP *snake_body,ALLEGRO_BITMAP *snake_head,ALLEGRO_DISPLAY *display);
+void Draw_Snake(Snake *snake,ALLEGRO_BITMAP *snake_body,ALLEGRO_BITMAP *snake_head,ALLEGRO_DISPLAY *display,double center_x,double center_y);
 
-void Draw_Snake_Head(double headDirection,int picture_size,ALLEGRO_BITMAP *snake_head,ALLEGRO_DISPLAY *display);
+void Draw_Snake_Head(Snake* snake,int center_x,int center_y,int picture_size,ALLEGRO_BITMAP *snake_head,ALLEGRO_DISPLAY *display);
 
 #endif // _DRAW_SNAKE_H_

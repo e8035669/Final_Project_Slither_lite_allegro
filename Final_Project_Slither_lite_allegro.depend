@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1481207453 source:d:\codeblocks_hw\final_project_slither_lite_allegro\main.c
+1483242391 source:d:\codeblocks_hw\final_project_slither_lite_allegro\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	<string.h>
 	<assert.h>
+	<omp.h>
 	<allegro5/allegro.h>
 	<allegro5/allegro_image.h>
 	<allegro5/allegro_acodec.h>
@@ -20,6 +21,7 @@
 	"Map.h"
 	"Snake.h"
 	"OtherFunctions.h"
+	"LeaderBoard.h"
 
 1481022127 d:\codeblocks_hw\final_project_slither_lite_allegro\structures.h
 	"kdebug/debug_c.h"
@@ -35,9 +37,10 @@
 	<assert.h>
 	<stdlib.h>
 
-1481019448 d:\codeblocks_hw\final_project_slither_lite_allegro\snake.h
+1483244287 d:\codeblocks_hw\final_project_slither_lite_allegro\snake.h
 	"Structures.h"
 	"BodyStack.h"
+	"OtherFunctions.h"
 	<stdlib.h>
 	<math.h>
 	<assert.h>
@@ -46,7 +49,7 @@
 1480124512 d:\codeblocks_hw\final_project_slither_lite_allegro\kdebug\debug_c.h
 	<stdio.h>
 
-1481204718 source:d:\codeblocks_hw\final_project_slither_lite_allegro\map.c
+1483244158 source:d:\codeblocks_hw\final_project_slither_lite_allegro\map.c
 	"Map.h"
 
 1481201297 d:\codeblocks_hw\final_project_slither_lite_allegro\map.h
@@ -58,17 +61,17 @@
 	"Snake.h"
 	<allegro5/allegro.h>
 
-1480498212 source:d:\codeblocks_hw\final_project_slither_lite_allegro\otherfunctions.c
+1483152978 source:d:\codeblocks_hw\final_project_slither_lite_allegro\otherfunctions.c
 	"OtherFunctions.h"
 
-1480498433 d:\codeblocks_hw\final_project_slither_lite_allegro\otherfunctions.h
+1483152978 d:\codeblocks_hw\final_project_slither_lite_allegro\otherfunctions.h
 	<math.h>
 	"Structures.h"
 
-1481016293 source:d:\codeblocks_hw\final_project_slither_lite_allegro\snake.c
+1483241267 source:d:\codeblocks_hw\final_project_slither_lite_allegro\snake.c
 	"Snake.h"
 
-1480956783 source:d:\codeblocks_hw\final_project_slither_lite_allegro\draw_map.c
+1483243149 source:d:\codeblocks_hw\final_project_slither_lite_allegro\draw_map.c
 	"draw_map.h"
 	<stdio.h>
 
@@ -80,10 +83,10 @@
 
 1480956723 d:\codeblocks_hw\final_project_slither_lite_allegro\define.h
 
-1481018753 source:d:\codeblocks_hw\final_project_slither_lite_allegro\draw_snake.c
+1483243032 source:d:\codeblocks_hw\final_project_slither_lite_allegro\draw_snake.c
 	"draw_snake.h"
 
-1481015905 d:\codeblocks_hw\final_project_slither_lite_allegro\draw_snake.h
+1483241612 d:\codeblocks_hw\final_project_slither_lite_allegro\draw_snake.h
 	"define.h"
 	"Structures.h"
 	"draw_map.h"
@@ -91,10 +94,10 @@
 	<allegro5/allegro.h>
 	<allegro5/allegro_image.h>
 
-1481203063 source:d:\codeblocks_hw\final_project_slither_lite_allegro\init.c
+1483239972 source:d:\codeblocks_hw\final_project_slither_lite_allegro\init.c
 	"Init.h"
 
-1481203498 d:\codeblocks_hw\final_project_slither_lite_allegro\init.h
+1483152784 d:\codeblocks_hw\final_project_slither_lite_allegro\init.h
 	<stdlib.h>
 	"define.h"
 	"kdebug/debug_c.h"
@@ -104,4 +107,15 @@
 	<allegro5/allegro_image.h>
 	<allegro5/allegro_acodec.h>
 	<allegro5/allegro_primitives.h>
+
+1482511314 source:d:\codeblocks_hw\final_project_slither_lite_allegro\leaderboard.c
+	"LeaderBoard.h"
+
+1483153453 d:\codeblocks_hw\final_project_slither_lite_allegro\leaderboard.h
+	<assert.h>
+	<time.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"kdebug/debug_c.h"
 
