@@ -28,16 +28,16 @@ int Position_To_Picture(int number,ALLEGRO_DISPLAY *display,int select) {
 	return -1;
 }
 
-void Draw_Map(int x,int y,ALLEGRO_BITMAP ***bitmap,ALLEGRO_DISPLAY *display,Map *map) {
+void Draw_Map(Position position,ALLEGRO_BITMAP ***bitmap,ALLEGRO_DISPLAY *display,Map *map) {
 	int pict_x_min,pict_x_max,pict_y_min,pict_y_max;    //picture number in the screen
 	int x_min,x_max,y_min,y_max;                        //the screen's size
 	int i,j;
 	int dx=0,dy=0;          //position to draw bitmap in the screen
 
-	x_min=x-al_get_display_width(display)/2;
-	x_max=x+al_get_display_width(display)/2;
-	y_min=y-al_get_display_height(display)/2;
-	y_max=y+al_get_display_height(display)/2;
+	x_min=position.x-al_get_display_width(display)/2;
+	x_max=position.x+al_get_display_width(display)/2;
+	y_min=position.y-al_get_display_height(display)/2;
+	y_max=position.y+al_get_display_height(display)/2;
 
 	pict_x_min=PTP(x_min,display,0);
 	pict_x_max=PTP(x_max,display,0);
@@ -49,12 +49,12 @@ void Draw_Map(int x,int y,ALLEGRO_BITMAP ***bitmap,ALLEGRO_DISPLAY *display,Map 
 			if(i<PICTURE_NUM && i>=0 && j<PICTURE_NUM && j>=0) {
 				al_draw_bitmap_region(bitmap[i][j],PTP(x_min,display,1),PTP(y_min,display,1),PTP(x_min,display,2),PTP(y_min,display,3),dx,dy,0);
 			}
-			Draw_Map_Border(x,y,display,map);
+			Draw_Map_Border(position.x,position.y,display,map);
 			dx+=PTP(x_min,display,2);
 			x_min+=PTP(x_min,display,2);
 		}
 		dx=0;
-		x_min=x-al_get_display_width(display)/2;
+		x_min=position.x-al_get_display_width(display)/2;
 		dy+=PTP(y_min,display,3);
 		y_min+=PTP(y_min,display,3);
 	}

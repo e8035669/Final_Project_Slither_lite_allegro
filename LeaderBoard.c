@@ -6,24 +6,24 @@ void LeaderBoard_insertNewRecord(char name[],int score) {
 
 	Record thisRecord;
 	strcpy(thisRecord.name,name);
-    thisRecord.score = score;
-    thisRecord.timeStamp = time(NULL);
+	thisRecord.score = score;
+	thisRecord.timeStamp = time(NULL);
 
 	Record* tmp = realloc(records,sizeof(Record)*(count+1));
-	if(tmp){
+	if(tmp) {
 		records = tmp;
-	}else{
+	} else {
 		assert(0);
 	}
 
 	records[count] = thisRecord;
 	count++;
 	LeaderBoard_sortRecord(records,count);
-	if(count>10){
+	if(count>10) {
 		FILE* file = fopen("data1","wb");
 		fwrite(records,sizeof(Record),10,file);
 		fclose(file);
-	}else{
+	} else {
 		FILE* file = fopen("data1","wb");
 		fwrite(records,sizeof(Record),count,file);
 		fclose(file);

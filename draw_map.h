@@ -20,7 +20,7 @@
 int Position_To_Picture(int number,ALLEGRO_DISPLAY *display,int select);                                     //position to picture
 
 //parameter x,y is the position in the map , bitmap is bhe background's bitmap
-void Draw_Map(int x,int y,ALLEGRO_BITMAP ***bitmap,ALLEGRO_DISPLAY *display,Map *map);
+void Draw_Map(Position position,ALLEGRO_BITMAP ***bitmap,ALLEGRO_DISPLAY *display,Map *map);
 
 //destroy the 2D bitmap pointer
 //void My_Allegro_Destroy_Map(ALLEGRO_BITMAP ***bitmap);

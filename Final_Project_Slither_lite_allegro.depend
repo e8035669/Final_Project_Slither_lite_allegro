@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1483242391 source:d:\codeblocks_hw\final_project_slither_lite_allegro\main.c
+1483868192 source:d:\codeblocks_hw\final_project_slither_lite_allegro\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -23,12 +23,12 @@
 	"OtherFunctions.h"
 	"LeaderBoard.h"
 
-1481022127 d:\codeblocks_hw\final_project_slither_lite_allegro\structures.h
+1483864318 d:\codeblocks_hw\final_project_slither_lite_allegro\structures.h
 	"kdebug/debug_c.h"
 	<allegro5/allegro.h>
 	<allegro5/allegro_font.h>
 
-1481201720 source:d:\codeblocks_hw\final_project_slither_lite_allegro\bodystack.c
+1483718454 source:d:\codeblocks_hw\final_project_slither_lite_allegro\bodystack.c
 	"BodyStack.h"
 
 1480870290 d:\codeblocks_hw\final_project_slither_lite_allegro\bodystack.h
@@ -37,7 +37,7 @@
 	<assert.h>
 	<stdlib.h>
 
-1483244287 d:\codeblocks_hw\final_project_slither_lite_allegro\snake.h
+1483865621 d:\codeblocks_hw\final_project_slither_lite_allegro\snake.h
 	"Structures.h"
 	"BodyStack.h"
 	"OtherFunctions.h"
@@ -45,14 +45,15 @@
 	<math.h>
 	<assert.h>
 	<string.h>
+	"atan2_dict.h"
 
 1480124512 d:\codeblocks_hw\final_project_slither_lite_allegro\kdebug\debug_c.h
 	<stdio.h>
 
-1483244158 source:d:\codeblocks_hw\final_project_slither_lite_allegro\map.c
+1483868078 source:d:\codeblocks_hw\final_project_slither_lite_allegro\map.c
 	"Map.h"
 
-1481201297 d:\codeblocks_hw\final_project_slither_lite_allegro\map.h
+1483866916 d:\codeblocks_hw\final_project_slither_lite_allegro\map.h
 	<stdlib.h>
 	<math.h>
 	"define.h"
@@ -60,22 +61,25 @@
 	"draw_map.h"
 	"Snake.h"
 	<allegro5/allegro.h>
-
-1483152978 source:d:\codeblocks_hw\final_project_slither_lite_allegro\otherfunctions.c
+	"allegro5/allegro_audio.h"
 	"OtherFunctions.h"
 
-1483152978 d:\codeblocks_hw\final_project_slither_lite_allegro\otherfunctions.h
+1483852064 source:d:\codeblocks_hw\final_project_slither_lite_allegro\otherfunctions.c
+	"OtherFunctions.h"
+
+1483852054 d:\codeblocks_hw\final_project_slither_lite_allegro\otherfunctions.h
 	<math.h>
 	"Structures.h"
+	<allegro5/allegro_audio.h>
 
-1483241267 source:d:\codeblocks_hw\final_project_slither_lite_allegro\snake.c
+1483851192 source:d:\codeblocks_hw\final_project_slither_lite_allegro\snake.c
 	"Snake.h"
 
-1483243149 source:d:\codeblocks_hw\final_project_slither_lite_allegro\draw_map.c
+1483715330 source:d:\codeblocks_hw\final_project_slither_lite_allegro\draw_map.c
 	"draw_map.h"
 	<stdio.h>
 
-1480956843 d:\codeblocks_hw\final_project_slither_lite_allegro\draw_map.h
+1483715290 d:\codeblocks_hw\final_project_slither_lite_allegro\draw_map.h
 	"define.h"
 	"Structures.h"
 	<allegro5/allegro.h>
@@ -83,10 +87,10 @@
 
 1480956723 d:\codeblocks_hw\final_project_slither_lite_allegro\define.h
 
-1483243032 source:d:\codeblocks_hw\final_project_slither_lite_allegro\draw_snake.c
+1483764274 source:d:\codeblocks_hw\final_project_slither_lite_allegro\draw_snake.c
 	"draw_snake.h"
 
-1483241612 d:\codeblocks_hw\final_project_slither_lite_allegro\draw_snake.h
+1483715470 d:\codeblocks_hw\final_project_slither_lite_allegro\draw_snake.h
 	"define.h"
 	"Structures.h"
 	"draw_map.h"
@@ -94,13 +98,14 @@
 	<allegro5/allegro.h>
 	<allegro5/allegro_image.h>
 
-1483239972 source:d:\codeblocks_hw\final_project_slither_lite_allegro\init.c
+1483851192 source:d:\codeblocks_hw\final_project_slither_lite_allegro\init.c
 	"Init.h"
 
-1483152784 d:\codeblocks_hw\final_project_slither_lite_allegro\init.h
+1483851154 d:\codeblocks_hw\final_project_slither_lite_allegro\init.h
 	<stdlib.h>
 	"define.h"
 	"kdebug/debug_c.h"
+	"atan2_dict.h"
 	<allegro5/allegro.h>
 	<allegro5/allegro_ttf.h>
 	<allegro5/allegro_audio.h>
@@ -108,7 +113,7 @@
 	<allegro5/allegro_acodec.h>
 	<allegro5/allegro_primitives.h>
 
-1482511314 source:d:\codeblocks_hw\final_project_slither_lite_allegro\leaderboard.c
+1483720537 source:d:\codeblocks_hw\final_project_slither_lite_allegro\leaderboard.c
 	"LeaderBoard.h"
 
 1483153453 d:\codeblocks_hw\final_project_slither_lite_allegro\leaderboard.h
@@ -118,4 +123,10 @@
 	<stdlib.h>
 	<string.h>
 	"kdebug/debug_c.h"
+
+1483851573 source:d:\codeblocks_hw\final_project_slither_lite_allegro\atan2_dict.c
+	"atan2_dict.h"
+	<math.h>
+
+1483851634 d:\codeblocks_hw\final_project_slither_lite_allegro\atan2_dict.h
 

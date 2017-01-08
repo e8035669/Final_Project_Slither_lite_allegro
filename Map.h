@@ -7,9 +7,10 @@
 #include "draw_map.h"
 #include "Snake.h"
 #include <allegro5/allegro.h>
-
+#include "allegro5/allegro_audio.h"
+#include "OtherFunctions.h"
 #define TOTAL_COLOR 5
-
+#define EAT_EVENT_TYPE ALLEGRO_GET_EVENT_TYPE('E','A','T','S')
 
 
 /** @brief 建立地圖的結構
@@ -29,11 +30,10 @@ Map* createMap(int mapSize);
  */
 void deleteMap(Map* map);
 
-/** @brief create the lightspot
-*
-*   @return Lightspot
-*
-*/
+void lightSpotContainerInit(Map* map);
+void freeLightSpotContainer(Map* map);
+
+
 /** @brief 建立新的lightspot
  *
  * @param mapSize int
@@ -55,13 +55,10 @@ LightSpot Create_LightSpot_xy(int x,int y);
 void Draw_LightSpot(Map *map,Snake *snake,ALLEGRO_BITMAP *lightspot,ALLEGRO_DISPLAY *display);
 
 
-/** @brief increase the map->lightSpotSize = "size"
-*   @param map Map*
-*          size int
-*   @return void
-*/
-//void Increase_LightSpotSize(Map *map);
-
+LightSpotContainer* getLightSpotContainer_xy(Map* map,int index_x,int index_y);
+LightSpotContainer* getLightSpotContainer_P(Map* map,LightSpotPos lSpP);
+int getContainerIndex(Map* map,int pos);
+LightSpotPos getLightSpotPos(Map* map,int x,int y);
 /** @brief 新增這個lightspot到地圖上
  *
  * @param map Map*
@@ -78,7 +75,7 @@ void Put_LightSpot(Map* map,LightSpot lSp);
  * @return void
  *
  */
-void Eated_LightSpot(Map* map,int i);
+void Eated_LightSpot(LightSpotContainer* container,int i);
 
 /** @brief 探測附近有沒有lightspot
  * 有的話就會吸過來吃掉
@@ -88,6 +85,13 @@ void Eated_LightSpot(Map* map,int i);
  * @return void
  *
  */
-void detectLightSpot(Body* Body_getHead, Map* map,Snake* snake);
+void detectLightSpot(Map* map,Snake* snake,ALLEGRO_SAMPLE *eat,ALLEGRO_EVENT_SOURCE *eventSource);
 
+
+void outdeath(Snake* snakes[]);
+void bodysdeath(Snake* snakes[],Map* map,int select);
+void deathAnimate(Snake* snake,Map* map,int timerCount);
+void AisBrain(Snake* snakes[],Mouse mouses[]);
+
+void mapUpdateLightSpotData(Map* map);
 #endif // MAP_H

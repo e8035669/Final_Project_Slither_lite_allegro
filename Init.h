@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "define.h"
 #include "kdebug/debug_c.h"
+#include "atan2_dict.h"
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_audio.h>
@@ -13,11 +14,15 @@
 
 struct _Resources {
 	ALLEGRO_DISPLAY* display;
-	ALLEGRO_FONT *pongFont ,*builtinFont;
+	ALLEGRO_FONT *pongFont,*builtinFont;
 	ALLEGRO_BITMAP *start,*start_button,*start_button_blink,*icon;
 	ALLEGRO_BITMAP ***bitmap,*snake_body,*snake_head,*lightspot;
 	ALLEGRO_TIMER* timer;
 	ALLEGRO_EVENT_QUEUE* eventQueue;
+	ALLEGRO_SAMPLE *bgMusic,*crashSound,*eatSound,*slideSound;
+	ALLEGRO_MIXER* defaultMixer;
+	ALLEGRO_SAMPLE_INSTANCE *slideSoundInstance;
+	ALLEGRO_EVENT_SOURCE eventSource;
 };
 
 void init();

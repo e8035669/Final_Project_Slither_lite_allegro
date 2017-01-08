@@ -11,9 +11,8 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="mingw_with_allegro_5211" />
-				<Option use_console_runner="0" />
 				<Compiler>
-					<Add option="-g -fopenmp" />
+					<Add option="-fopenmp" />
 				</Compiler>
 				<Linker>
 					<Add option="-lgomp" />
@@ -60,6 +59,10 @@
 		</Unit>
 		<Unit filename="Snake.h" />
 		<Unit filename="Structures.h" />
+		<Unit filename="atan2_dict.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="atan2_dict.h" />
 		<Unit filename="define.h" />
 		<Unit filename="draw_map.c">
 			<Option compilerVar="CC" />

@@ -41,13 +41,25 @@ typedef struct LightSpot {
 	int color;
 } LightSpot;
 
-typedef struct Map {
+typedef struct LightSpotPos {
+	int index_x;
+	int index_y;
+} LightSpotPos;
+
+typedef struct LightSpotContainer{
+	ALLEGRO_MUTEX* writeMutex;
 	LightSpot* lightSpot;
 	int lightSpotLength;
 	int lightSpotSize;
+}LightSpotContainer;
+
+typedef struct Map {
+	LightSpotContainer* lightSpotContainers;
+	int totalLightSpotLength;
+	int totalLightSpotSize;
+	int containerSize;
 	int size;
 } Map;
-
 
 
 #endif // STRUCTURES_H

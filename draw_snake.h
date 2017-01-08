@@ -10,8 +10,8 @@
 
 
 //draw snake in the middle of screen
-void Draw_Snake(Snake *snake,ALLEGRO_BITMAP *snake_body,ALLEGRO_BITMAP *snake_head,ALLEGRO_DISPLAY *display,double center_x,double center_y);
+void Draw_Snake(Snake *snake,ALLEGRO_BITMAP *snake_body,ALLEGRO_BITMAP *snake_head,ALLEGRO_DISPLAY *display,Position center);
 
-void Draw_Snake_Head(Snake* snake,int center_x,int center_y,int picture_size,ALLEGRO_BITMAP *snake_head,ALLEGRO_DISPLAY *display);
+void Draw_Snake_Head(Snake* snake,Position center,int picture_size,ALLEGRO_BITMAP *snake_head,ALLEGRO_DISPLAY *display);
 
 #endif // _DRAW_SNAKE_H_

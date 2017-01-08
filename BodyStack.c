@@ -68,11 +68,11 @@ int Snake_beShorter(Snake* snake) {
 	if(tmp) {
 		(snake->length)--;
 		free(tmp);
+		snake->picSize = Picture_Size(snake->length);
 		return 1;
 	} else {
 		return 0;
 	}
-	snake->picSize = Picture_Size(snake->length);
 }
 
 void Snake_lengthCheck(Snake* snake) {
