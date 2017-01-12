@@ -21,7 +21,7 @@
  * @return Map*
  *
  */
-Map* createMap(int mapSize);
+Map* createMap(int mapSize,int lightSpot);
 
 
 
@@ -46,10 +46,10 @@ void deleteMap(Map* map);
 void detectLightSpot(Map* map,Snake* snake,ALLEGRO_SAMPLE *eat,ALLEGRO_EVENT_SOURCE *eventSource);
 
 
-void outdeath(Snake* snakes[]);
-void bodysdeath(Snake* snakes[],Map* map,int select);
+void outdeath(Snake* snakes[],int Ainumbers);
+void bodysdeath(Snake* snakes[],int Ainumbers,Map* map,int select);
 void deathAnimate(Snake* snake,Map* map,int timerCount);
-void AisBrain(Snake* snakes[],Mouse mouses[]);
+void AisBrain(Snake* snakes[],Mouse mouses[],int Ainumbers);
 
 void mapUpdateLightSpotData(Map* map);
 #endif // MAP_H

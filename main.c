@@ -25,7 +25,7 @@
 #include "draw_lightspot.h"
 
 int showMenu(char* retName);
-int mainGameLoop(char* name);
+int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** snakes,Mouse* mouses,int Ainumbers));
 int main() {
 	srand((unsigned int)time(NULL));
 	init();
@@ -34,7 +34,7 @@ int main() {
 	char name[20] = "";
 	retCode = showMenu(name);
 	if(!retCode) {
-		mainGameLoop(name);
+		mainGameLoop(name,20,10000,AisBrain);
 	}
 	/*死掉後要新增一筆遊玩紀錄
 		並且顯示排行榜前十名*/
@@ -58,15 +58,23 @@ int showMenu(char* retName) {
 		al_wait_for_event(Res.eventQueue,&event);
 		switch(event.type) {
 			case ALLEGRO_EVENT_KEY_CHAR:
-				if(event.keyboard.keycode==ALLEGRO_KEY_ESCAPE) {
-					retCode = -1;
-					isDone = 1;
-				}
-				if(event.keyboard.keycode==ALLEGRO_KEY_BACKSPACE) {
-					if(strlen(name)>0) {
-						name[strlen(name)-1] = '\0';
-						isDisplayNeedRefresh = 1;
-					}
+				switch(event.keyboard.keycode) {
+					case ALLEGRO_KEY_ESCAPE:
+						retCode = -1;
+						isDone = 1;
+						break;
+					case ALLEGRO_KEY_BACKSPACE:
+						if(strlen(name)>0) {
+							name[strlen(name)-1] = '\0';
+							isDisplayNeedRefresh = 1;
+						}
+						break;
+					case ALLEGRO_KEY_ENTER:
+					case ALLEGRO_KEY_PAD_ENTER:
+						strcpy(retName,name);
+						retCode = 0;
+						isDone = 1;
+						break;
 				}
 				if(event.keyboard.unichar>=32 && event.keyboard.unichar<=126) {
 					if(strlen(name)<sizeof(name)-1) {
@@ -122,12 +130,12 @@ int showMenu(char* retName) {
 
 
 /**遊戲主體*/
-int mainGameLoop(char* name,int Ainumbers,a) {
+int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** snakes,Mouse* mouses,int Ainumbers)) {
 	/**< 建立所有蛇 */
 	Snake* snake = createSnake(p(5000,5000),name);
-	Snake* snakes[Ainumbers];
+	Snake** snakes = calloc(sizeof(Snake*),Ainumbers);
 	snakes[0]=snake;
-	aiSnakes(snakes);
+	aiSnakes(snakes,Ainumbers);
 
 	/**< 蛇前進的速度設定 */
 	int speed=0,aiSpeed=0,speedDelta=1,aiSpeedDelta=1;
@@ -136,11 +144,11 @@ int mainGameLoop(char* name,int Ainumbers,a) {
 	char keyIn[5]= {0};
 	int keyIn_int=0;
 	/**< 建立地圖 */
-	Map* map = createMap(10000);
+	Map* map = createMap(10000,lightspot);
 	/**< 建立所有滑鼠 */
 	Mouse mouse = m(1,1);
 	int isMouseBtnDown = 0;
-	Mouse mouses[Ainumbers]= {0};
+	Mouse* mouses = calloc(sizeof(Mouse),Ainumbers);
 	int i;
 	for(i=1; i<Ainumbers; i++) {
 		mouses[i].x=rand();
@@ -215,7 +223,7 @@ int mainGameLoop(char* name,int Ainumbers,a) {
 								mouses[i].x=rand()-(RAND_MAX>>1);
 								mouses[i].y=rand()-(RAND_MAX>>1);
 							}
-							AisBrain(snakes,mouses);
+							aiExec(snakes,mouses,Ainumbers);
 						}
 						/**< AI蛇移動 */
 						#pragma omp parallel for
@@ -229,9 +237,9 @@ int mainGameLoop(char* name,int Ainumbers,a) {
 							detectLightSpot(map,snakes[i],Res.eatSound,&Res.eventSource);
 						}
 						/**< 偵測界外 */
-						outdeath(snakes);
+						outdeath(snakes,Ainumbers);
 						/**< 偵測蛇碰撞 */
-						bodysdeath(snakes,map,FPS%6);
+						bodysdeath(snakes,Ainumbers,map,FPS%6);
 
 
 						/**< 死亡動畫 */
@@ -250,7 +258,7 @@ int mainGameLoop(char* name,int Ainumbers,a) {
 						}
 						/**< 死掉的蛇復活 */
 						if(event.timer.count%600==0) {
-							Snake_rebirth(snakes);
+							Snake_rebirth(snakes,Ainumbers);
 						}
 						if(snake->isDead==3)isDone = 1;
 						isDisplayNeedRefresh = 1;

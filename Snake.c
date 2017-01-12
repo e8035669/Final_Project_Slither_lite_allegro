@@ -70,7 +70,7 @@ void moveSnake(Snake* snake,Mouse cursor,double speed) {
 	}
 }
 
-void aiSnakes(Snake* snakes[]) {
+void aiSnakes(Snake* snakes[],int Ainumbers) {
 	Position pos1 = snakes[0]->head->current_position;
 	int i;
 	for(i=1; i<Ainumbers; i++) {
@@ -86,7 +86,7 @@ void aiSnakes(Snake* snakes[]) {
 }
 
 
-void Snake_rebirth(Snake* snakes[]) {
+void Snake_rebirth(Snake* snakes[],int Ainumbers) {
 	Position pos1 = snakes[0]->head->current_position;
 	int i;
 	for(i=1; i<Ainumbers; i++) {

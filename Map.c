@@ -1,6 +1,6 @@
 #include "Map.h"
 
-Map* createMap(int mapSize) {
+Map* createMap(int mapSize,int lightSpot) {
 	int i;
 	Map* map = malloc(sizeof(Map));
 	map->size = mapSize;
@@ -8,7 +8,7 @@ Map* createMap(int mapSize) {
 	map->totalLightSpotSize = 0;
 	map->containerSize = 100;
 	lightSpotContainerInit(map);
-	for(i=0; i<10000; i++) {
+	for(i=0; i<lightSpot; i++) {
 		Put_LightSpot(map,Create_LightSpot(map->size));
 	}
 	return map;
@@ -18,17 +18,6 @@ void deleteMap(Map* map) {
 	freeLightSpotContainer(map);
 	free(map);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 void detectLightSpot(Map* map,Snake* snake,ALLEGRO_SAMPLE *eat,ALLEGRO_EVENT_SOURCE *eventSource) {
 	if(snake->isDead)return;
@@ -71,7 +60,7 @@ void detectLightSpot(Map* map,Snake* snake,ALLEGRO_SAMPLE *eat,ALLEGRO_EVENT_SOU
 }
 
 
-void outdeath(Snake* snakes[]) {
+void outdeath(Snake* snakes[],int Ainumbers) {
 	int i;
 	for(i=0; i<Ainumbers; i++) {
 		if(snakes[i]->isDead)continue;
@@ -87,7 +76,7 @@ void outdeath(Snake* snakes[]) {
 		}
 	}
 }
-void bodysdeath(Snake* snakes[],Map* map,int select) {
+void bodysdeath(Snake* snakes[],int Ainumbers,Map* map,int select) {
 	int i;
 	int picSize=snakes[0]->picSize;
 	int num = Ainumbers/6+1;
@@ -154,7 +143,7 @@ void deathAnimate(Snake* snake,Map* map,int timerCount) {
 }
 
 
-void AisBrain(Snake* snakes[],Mouse mouses[]) {
+void AisBrain(Snake* snakes[],Mouse mouses[],int Ainumbers) {
 	int i;
 	for(i=1; i<Ainumbers; i++) {
 		Body* current_body=snakes[0]->tail;
