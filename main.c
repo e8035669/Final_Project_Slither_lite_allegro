@@ -22,6 +22,7 @@
 #include "Snake.h"
 #include "OtherFunctions.h"
 #include "LeaderBoard.h"
+#include "draw_lightspot.h"
 
 int showMenu(char* retName);
 int mainGameLoop(char* name);
@@ -161,6 +162,7 @@ int mainGameLoop(char* name) {
 			ALLEGRO_EVENT event;
 			if(!al_get_next_event(Res.eventQueue,&event))break;
 			switch(event.type) {
+				/**< 更新滑鼠移動 */
 				case ALLEGRO_EVENT_MOUSE_AXES: {
 						int x = event.mouse.x-(al_get_display_width(Res.display)>>1);
 						int y = event.mouse.y-(al_get_display_height(Res.display)>>1);
@@ -175,23 +177,22 @@ int mainGameLoop(char* name) {
 				case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
 					isMouseBtnDown = 0;
 					break;
-				case ALLEGRO_EVENT_DISPLAY_CLOSE:
-					retCode = -1;
-					isDone = 1;
-					break;
+
 				case ALLEGRO_EVENT_TIMER: {
+						/**< 使用者的蛇 */
 						if(userControl==1) {
 							if(isMouseBtnDown&&snake->length>10) {
 								al_set_sample_instance_playing(Res.slideSoundInstance,1);
 								if(event.timer.count%15==7) {
-									speedDelta=snakeSpeedDelta(7,5,2,-1,speed,speedDelta);
+									speedDelta=snakeSpeedDelta(9,6,2,-1,speed,speedDelta);
 									speed+=speedDelta;
-									if(rand()%10<5) {
-										Body* tmp = Body_getTail(snake);
-										Put_LightSpot(map,Create_LightSpot_xy(tmp->current_position.x,tmp->current_position.y));
+									Body* tmp = Body_getTail(snake);
+									Put_LightSpot(map,Create_LightSpot_xy(tmp->current_position.x,tmp->current_position.y));
+									int i;
+									for(i=0; i<3; i++) {
+										Snake_beShorter(snake);
 									}
 								}
-								Snake_beShorter(snake);
 							} else {
 								al_set_sample_instance_playing(Res.slideSoundInstance,0);
 								if(event.timer.count%10==5) {
@@ -200,9 +201,11 @@ int mainGameLoop(char* name) {
 								}
 							}
 						}
+						/**< 蛇移動 */
 						if(userControl==1) {
 							moveSnake(snake,mouse,speed);
 						}
+						/**< AI的蛇 */
 						if(event.timer.count%15==3) {
 							aiSpeedDelta=snakeSpeedDelta(5,3,1,-3,aiSpeed,aiSpeedDelta);
 							aiSpeed+=aiSpeedDelta;
@@ -214,38 +217,43 @@ int mainGameLoop(char* name) {
 							}
 							AisBrain(snakes,mouses);
 						}
+						/**< AI蛇移動 */
 						#pragma omp parallel for
 						for(i=((userControl)?1:0); i<Ainumbers; i++) {
 							moveSnake(snakes[i],mouses[i],aiSpeed);
 						}
 
+						/**< 偵測吃掉附近亮點 */
+						#pragma omp parallel for
+						for(i=0; i<Ainumbers; i++) { //讓AI蛇吃到亮點也變長
+							detectLightSpot(map,snakes[i],Res.eatSound,&Res.eventSource);
+						}
+						/**< 偵測界外 */
+						outdeath(snakes);
+						/**< 偵測蛇碰撞 */
+						bodysdeath(snakes,map,FPS%6);
+
+
+						/**< 死亡動畫 */
 						for(i=0; i<Ainumbers; i++) {
 							deathAnimate(snakes[i],map,event.timer.count);
 						}
-						if(snake->isDead==3)isDone = 1;
-						isDisplayNeedRefresh = 1;
-
-
+						/**< 有機率產生新的亮點 */
 						if(rand()%100 < 10) {
 							Put_LightSpot(map,Create_LightSpot(map->size));
 						}
+						/**< FPS資料更新 */
 						if(event.timer.count%60==0) {
 							oldFPS = FPS;
 							FPS = 0;
 							mapUpdateLightSpotData(map);
 						}
-
+						/**< 死掉的蛇復活 */
 						if(event.timer.count%600==0) {
-							for(i=1; i<Ainumbers; i++) {
-								if(snakes[i]->isDead==3) {
-									deleteSnake(snakes[i]);
-									char aiName[5];
-									sprintf(aiName,"%d",i);
-									snakes[i] = createSnake(p(rand()%10000,rand()%10000),aiName);
-								}
-							}
+							Snake_rebirth(snakes);
 						}
-
+						if(snake->isDead==3)isDone = 1;
+						isDisplayNeedRefresh = 1;
 
 					}
 					break;
@@ -257,6 +265,7 @@ int mainGameLoop(char* name) {
 					eatenMusic(event,snakes[keyIn_int]->head->current_position,Res.eatSound);
 					break;
 				case ALLEGRO_EVENT_KEY_CHAR:
+					/**< 數字輸入 */
 					if(event.keyboard.keycode==ALLEGRO_KEY_SPACE) {
 						if(userControl==1) userControl=0;
 						else if(userControl==0 && keyIn_int==0) userControl=1;
@@ -277,6 +286,10 @@ int mainGameLoop(char* name) {
 						}
 					}
 					break;
+				case ALLEGRO_EVENT_DISPLAY_CLOSE:
+					retCode = -1;
+					isDone = 1;
+					break;
 			}
 		}
 
@@ -284,13 +297,6 @@ int mainGameLoop(char* name) {
 		if(isDisplayNeedRefresh) {
 			FPS++;
 			isDisplayNeedRefresh = 0;
-			#pragma omp parallel for
-			for(i=0; i<Ainumbers; i++) { //讓AI蛇吃到亮點也變長
-				detectLightSpot(map,snakes[i],Res.eatSound,&Res.eventSource);
-			}
-			outdeath(snakes);
-			bodysdeath(snakes,map,FPS%6);
-
 			al_clear_to_color(al_map_rgb(0,0,0));
 			Draw_Map(snakes[keyIn_int]->head->current_position,Res.bitmap,Res.display,map);
 			Draw_LightSpot(map,snakes[keyIn_int],Res.lightspot,Res.display);

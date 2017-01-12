@@ -1,19 +1,6 @@
 #include "draw_map.h"
 
 #include <stdio.h>
-/*
-void My_Allegro_Load_Map(ALLEGRO_BITMAP ***bitmap)
-{
-    int i,j;
-    char str[10]={'b','g','/',' ',' ','.','j','p','g','\0'};
-    for(i=0;i<PICTURE_NUM;i++)
-        for(j=0;j<PICTURE_NUM;j++){
-            str[3]=i+'0';
-            str[4]=j+'0';
-            bitmap[i][j]=al_load_bitmap(str);
-        }
-}*/
-
 
 
 int Position_To_Picture(int number,ALLEGRO_DISPLAY *display,int select) {
@@ -60,23 +47,6 @@ void Draw_Map(Position position,ALLEGRO_BITMAP ***bitmap,ALLEGRO_DISPLAY *displa
 	}
 }
 
-
-/*
-void My_Allegro_Destroy_Map(ALLEGRO_BITMAP ***bitmap)
-{
-    int i,j;
-    for(i=0;i<PICTURE_NUM;i++)
-        for(j=0;j<PICTURE_NUM;j++)
-            al_destroy_bitmap(bitmap[i][j]);
-
-    for(i=0;i<PICTURE_NUM;i++)
-        free(bitmap[i]);
-
-    free(bitmap);
-}*/
-
-
-
 void Draw_Map_Border(int x,int y,ALLEGRO_DISPLAY *display,Map *map) {
 	if(x+al_get_display_width(display)/2>=map->size) {
 		al_draw_line(Pos(map->size,x,display,0),0,Pos(map->size,x,display,0),al_get_display_height(display),al_map_rgb(0,255,255),10.0);
@@ -99,3 +69,5 @@ int Pos(int number,int center,ALLEGRO_DISPLAY *display,int select) {
 		return number-center+(al_get_display_height(display)>>1);
 	return -1;
 }
+
+

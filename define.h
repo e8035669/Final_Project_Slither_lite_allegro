@@ -7,4 +7,5 @@
 #define LIGHTSPOT_SIZE 50
 
 
+
 #endif // _DEFINE_H_

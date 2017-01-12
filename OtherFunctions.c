@@ -39,3 +39,15 @@ void eatenMusic(ALLEGRO_EVENT event,Position center,ALLEGRO_SAMPLE *eat) {
 		al_play_sample(eat,gain,pan,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 	}
 }
+
+
+
+int snakeSpeedDelta(int speedMax,int speedMin,int accelerate,int slowDown,int speed,int speedDelta) {
+	if(speed<=speedMin) {
+		return accelerate;
+	} else if(speed>=speedMax) {
+		return slowDown;
+	} else {
+		return speedDelta;
+	}
+}

@@ -2,7 +2,7 @@
 
 int showInitScreen(char* itemName);
 void init() {
-	al_set_app_name("Slither Lite by ....");
+	al_set_app_name("\u8caa\u5403\u86c7\u7684\u5371\u6a5f");
 	al_init();
 	al_install_keyboard();
 	al_install_mouse();

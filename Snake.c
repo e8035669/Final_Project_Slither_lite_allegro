@@ -71,22 +71,35 @@ void moveSnake(Snake* snake,Mouse cursor,double speed) {
 }
 
 void aiSnakes(Snake* snakes[]) {
+	Position pos1 = snakes[0]->head->current_position;
 	int i;
 	for(i=1; i<Ainumbers; i++) {
 		char Ainame[5]= "";
 		sprintf(Ainame,"%d",i);
-		int x=rand()%10000;
-		int y=rand()%10000;
-		snakes[i]=createSnake(p(x,y),Ainame);
+		Position pos2 = p(rand()%10000,rand()%10000);
+		while(abs(pos1.x-pos2.x)<300||abs(pos1.y-pos2.y)<300) {
+			pos2.x = rand()%10000;
+			pos2.y = rand()%10000;
+		}
+		snakes[i]=createSnake(pos2,Ainame);
 	}
 }
 
-int snakeSpeedDelta(int speedMax,int speedMin,int accelerate,int slowDown,int speed,int speedDelta) {
-	if(speed<=speedMin) {
-		return accelerate;
-	} else if(speed>=speedMax) {
-		return slowDown;
-	} else {
-		return speedDelta;
+
+void Snake_rebirth(Snake* snakes[]) {
+	Position pos1 = snakes[0]->head->current_position;
+	int i;
+	for(i=1; i<Ainumbers; i++) {
+		if(snakes[i]->isDead==3) {
+			deleteSnake(snakes[i]);
+			char aiName[5];
+			sprintf(aiName,"%d",i);
+			Position pos2 = p(rand()%10000,rand()%10000);
+			while(abs(pos1.x-pos2.x)<300||abs(pos1.y-pos2.y)<300) {
+				pos2.x = rand()%10000;
+				pos2.y = rand()%10000;
+			}
+			snakes[i] = createSnake(pos2,aiName);
+		}
 	}
 }

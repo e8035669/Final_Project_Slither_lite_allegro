@@ -9,6 +9,7 @@
 #include <allegro5/allegro.h>
 #include "allegro5/allegro_audio.h"
 #include "OtherFunctions.h"
+#include "Lightspot.h"
 #define TOTAL_COLOR 5
 #define EAT_EVENT_TYPE ALLEGRO_GET_EVENT_TYPE('E','A','T','S')
 
@@ -30,52 +31,9 @@ Map* createMap(int mapSize);
  */
 void deleteMap(Map* map);
 
-void lightSpotContainerInit(Map* map);
-void freeLightSpotContainer(Map* map);
 
 
-/** @brief 建立新的lightspot
- *
- * @param mapSize int
- * @return LightSpot
- *
- */
-LightSpot Create_LightSpot(int mapSize);
 
-LightSpot Create_LightSpot_xyc(int x,int y,int color);
-
-LightSpot Create_LightSpot_xy(int x,int y);
-/** @brief draw the lightspot
-*   @param map Map*
-*          snake Snake*
-*          lightspot ALLEGRO_BITMAP*
-*   @return void
-*
-*/
-void Draw_LightSpot(Map *map,Snake *snake,ALLEGRO_BITMAP *lightspot,ALLEGRO_DISPLAY *display);
-
-
-LightSpotContainer* getLightSpotContainer_xy(Map* map,int index_x,int index_y);
-LightSpotContainer* getLightSpotContainer_P(Map* map,LightSpotPos lSpP);
-int getContainerIndex(Map* map,int pos);
-LightSpotPos getLightSpotPos(Map* map,int x,int y);
-/** @brief 新增這個lightspot到地圖上
- *
- * @param map Map*
- * @param lSp LightSpot
- * @return void
- *
- */
-void Put_LightSpot(Map* map,LightSpot lSp);
-
-/** @brief 移除(吃)掉某一個lightspot
- *
- * @param map Map*
- * @param i int
- * @return void
- *
- */
-void Eated_LightSpot(LightSpotContainer* container,int i);
 
 /** @brief 探測附近有沒有lightspot
  * 有的話就會吸過來吃掉

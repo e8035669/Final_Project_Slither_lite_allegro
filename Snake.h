@@ -11,6 +11,7 @@
 #include <assert.h>
 #include <string.h>
 #include "atan2_dict.h"
+#include "define.h"
 
 /** @brief 建立一隻蛇的Struct 並且初始化蛇的長度為10
  *	需要建立的位置 以及 蛇的名子
@@ -43,17 +44,6 @@ void moveSnake(Snake* snake,Mouse cursor,double speed);
 
 void aiSnakes(Snake* snakes[]);
 
-/** @brief return the speedDelta for snake
- *
- * @param speedMax int
- * @param speedMin int
- * @param accelerate int
- * @param slowDown int
- * @param speed int
- * @param speedDelta int
- * @return int
- *
- */
-int snakeSpeedDelta(int speedMax,int speedMin,int accelerate,int slowDown,int speed,int speedDelta);
+void Snake_rebirth(Snake* snakes[]);
 
 #endif // SNAKE_H

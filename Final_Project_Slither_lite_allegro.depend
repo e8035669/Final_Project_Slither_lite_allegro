@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1483868192 source:d:\codeblocks_hw\final_project_slither_lite_allegro\main.c
+1484212868 source:d:\codeblocks_hw\final_project_slither_lite_allegro\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -22,6 +22,7 @@
 	"Snake.h"
 	"OtherFunctions.h"
 	"LeaderBoard.h"
+	"draw_lightspot.h"
 
 1483864318 d:\codeblocks_hw\final_project_slither_lite_allegro\structures.h
 	"kdebug/debug_c.h"
@@ -37,7 +38,7 @@
 	<assert.h>
 	<stdlib.h>
 
-1483865621 d:\codeblocks_hw\final_project_slither_lite_allegro\snake.h
+1484213063 d:\codeblocks_hw\final_project_slither_lite_allegro\snake.h
 	"Structures.h"
 	"BodyStack.h"
 	"OtherFunctions.h"
@@ -46,14 +47,15 @@
 	<assert.h>
 	<string.h>
 	"atan2_dict.h"
+	"define.h"
 
 1480124512 d:\codeblocks_hw\final_project_slither_lite_allegro\kdebug\debug_c.h
 	<stdio.h>
 
-1483868078 source:d:\codeblocks_hw\final_project_slither_lite_allegro\map.c
+1483945741 source:d:\codeblocks_hw\final_project_slither_lite_allegro\map.c
 	"Map.h"
 
-1483866916 d:\codeblocks_hw\final_project_slither_lite_allegro\map.h
+1483944688 d:\codeblocks_hw\final_project_slither_lite_allegro\map.h
 	<stdlib.h>
 	<math.h>
 	"define.h"
@@ -63,19 +65,20 @@
 	<allegro5/allegro.h>
 	"allegro5/allegro_audio.h"
 	"OtherFunctions.h"
+	"Lightspot.h"
 
-1483852064 source:d:\codeblocks_hw\final_project_slither_lite_allegro\otherfunctions.c
+1483940549 source:d:\codeblocks_hw\final_project_slither_lite_allegro\otherfunctions.c
 	"OtherFunctions.h"
 
-1483852054 d:\codeblocks_hw\final_project_slither_lite_allegro\otherfunctions.h
+1483940608 d:\codeblocks_hw\final_project_slither_lite_allegro\otherfunctions.h
 	<math.h>
 	"Structures.h"
 	<allegro5/allegro_audio.h>
 
-1483851192 source:d:\codeblocks_hw\final_project_slither_lite_allegro\snake.c
+1484214068 source:d:\codeblocks_hw\final_project_slither_lite_allegro\snake.c
 	"Snake.h"
 
-1483715330 source:d:\codeblocks_hw\final_project_slither_lite_allegro\draw_map.c
+1483944508 source:d:\codeblocks_hw\final_project_slither_lite_allegro\draw_map.c
 	"draw_map.h"
 	<stdio.h>
 
@@ -85,7 +88,7 @@
 	<allegro5/allegro.h>
 	<allegro5/allegro_primitives.h>
 
-1480956723 d:\codeblocks_hw\final_project_slither_lite_allegro\define.h
+1484213255 d:\codeblocks_hw\final_project_slither_lite_allegro\define.h
 
 1483764274 source:d:\codeblocks_hw\final_project_slither_lite_allegro\draw_snake.c
 	"draw_snake.h"
@@ -98,7 +101,7 @@
 	<allegro5/allegro.h>
 	<allegro5/allegro_image.h>
 
-1483851192 source:d:\codeblocks_hw\final_project_slither_lite_allegro\init.c
+1484214518 source:d:\codeblocks_hw\final_project_slither_lite_allegro\init.c
 	"Init.h"
 
 1483851154 d:\codeblocks_hw\final_project_slither_lite_allegro\init.h
@@ -129,4 +132,19 @@
 	<math.h>
 
 1483851634 d:\codeblocks_hw\final_project_slither_lite_allegro\atan2_dict.h
+
+1483944028 source:d:\codeblocks_hw\final_project_slither_lite_allegro\draw_lightspot.c
+	"draw_lightspot.h"
+
+1483944620 d:\codeblocks_hw\final_project_slither_lite_allegro\draw_lightspot.h
+	"allegro5/allegro.h"
+	"Structures.h"
+	"Lightspot.h"
+
+1483944668 d:\codeblocks_hw\final_project_slither_lite_allegro\lightspot.h
+	"Structures.h"
+	"Map.h"
+
+1483943908 source:d:\codeblocks_hw\final_project_slither_lite_allegro\lightspot.c
+	"Lightspot.h"
 
