@@ -122,7 +122,7 @@ int showMenu(char* retName) {
 
 
 /**遊戲主體*/
-int mainGameLoop(char* name) {
+int mainGameLoop(char* name,int Ainumbers,a) {
 	/**< 建立所有蛇 */
 	Snake* snake = createSnake(p(5000,5000),name);
 	Snake* snakes[Ainumbers];

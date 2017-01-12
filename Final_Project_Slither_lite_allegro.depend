@@ -101,7 +101,7 @@
 	<allegro5/allegro.h>
 	<allegro5/allegro_image.h>
 
-1484214518 source:d:\codeblocks_hw\final_project_slither_lite_allegro\init.c
+1484215880 source:d:\codeblocks_hw\final_project_slither_lite_allegro\init.c
 	"Init.h"
 
 1483851154 d:\codeblocks_hw\final_project_slither_lite_allegro\init.h
@@ -147,4 +147,6 @@
 
 1483943908 source:d:\codeblocks_hw\final_project_slither_lite_allegro\lightspot.c
 	"Lightspot.h"
+
+1484215818 source:d:\codeblocks_hw\final_project_slither_lite_allegro\main.rc
 
