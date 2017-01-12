@@ -48,7 +48,7 @@ void detectLightSpot(Map* map,Snake* snake,ALLEGRO_SAMPLE *eat,ALLEGRO_EVENT_SOU
 
 void outdeath(Snake* snakes[],int Ainumbers);
 void bodysdeath(Snake* snakes[],int Ainumbers,Map* map,int select);
-void deathAnimate(Snake* snake,Map* map,int timerCount);
+void deathAnimate(Snake* snake,Map* map);
 void AisBrain(Snake* snakes[],Mouse mouses[],int Ainumbers);
 
 void mapUpdateLightSpotData(Map* map);

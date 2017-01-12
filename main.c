@@ -34,7 +34,7 @@ int main() {
 	char name[20] = "";
 	retCode = showMenu(name);
 	if(!retCode) {
-		mainGameLoop(name,20,10000,AisBrain);
+		mainGameLoop(name,500,10000,AisBrain);
 	}
 	/*死掉後要新增一筆遊玩紀錄
 		並且顯示排行榜前十名*/
@@ -244,7 +244,7 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 
 						/**< 死亡動畫 */
 						for(i=0; i<Ainumbers; i++) {
-							deathAnimate(snakes[i],map,event.timer.count);
+							deathAnimate(snakes[i],map);
 						}
 						/**< 有機率產生新的亮點 */
 						if(rand()%100 < 10) {

@@ -78,7 +78,8 @@ void outdeath(Snake* snakes[],int Ainumbers) {
 }
 void bodysdeath(Snake* snakes[],int Ainumbers,Map* map,int select) {
 	int i;
-	int picSize=snakes[0]->picSize;
+	const int speed=11;
+	const int picSize=snakes[0]->picSize;
 	int num = Ainumbers/6+1;
 	int start = num*select;
 	int end = (num*(select+1)>Ainumbers)?Ainumbers:num*(select+1);
@@ -91,22 +92,31 @@ void bodysdeath(Snake* snakes[],int Ainumbers,Map* map,int select) {
 			Body* current_body=snakes[j]->tail;
 			double current_x=current_body->current_position.x;
 			double current_y=current_body->current_position.y;
-			int k;
-			for(k=0; k<snakes[j]->length; k++) {
+			int k,difference;
+			for(k=0; k<snakes[j]->length; k+=difference) {
 				if(current_body->prev!=NULL) {
+					long long distance2=0;
+					distance2=(long long)((snakes[i]->head->current_position.x-current_x)*
+										  (snakes[i]->head->current_position.x-current_x)+
+										  (snakes[i]->head->current_position.y-current_y)*
+										  (snakes[i]->head->current_position.y-current_y));
 					if(abs(snakes[i]->head->current_position.x-current_x)<75) {
 						if(abs(snakes[i]->head->current_position.y-current_y)<75) {
-							if(
-								(snakes[i]->head->current_position.x-current_x)*
-								(snakes[i]->head->current_position.x-current_x)+
-								(snakes[i]->head->current_position.y-current_y)*
-								(snakes[i]->head->current_position.y-current_y)<
-								picSize*picSize) {
+							if(distance2<picSize*picSize) {
 								snakes[i]->isDead=2;
 							}
 						}
 					}
-					current_body=current_body->prev;
+					difference=((int)sqrt((double)distance2))/(speed*4);
+					difference= (difference==0? 1:difference);
+					int d;
+					for(d=0; d<difference; d++) {
+						if(current_body->prev!=NULL) {
+							current_body=current_body->prev;
+						} else {
+							break;
+						}
+					}
 					current_x=current_body->current_position.x;
 					current_y=current_body->current_position.y;
 				}
@@ -116,13 +126,13 @@ void bodysdeath(Snake* snakes[],int Ainumbers,Map* map,int select) {
 }
 
 
-void deathAnimate(Snake* snake,Map* map,int timerCount) {
+void deathAnimate(Snake* snake,Map* map) {
 	if(snake->isDead==2) {
 		if(snake->length>1) {
 			int i = (snake->length)/10 + 1;
 			while(i--) {
 				Body* tmp = Body_getTail(snake);
-				if(timerCount%3==0 && tmp) {
+				if(snake->length%3==0 && tmp) {
 					Put_LightSpot(map,Create_LightSpot_xy(tmp->current_position.x+rand()%10-4,tmp->current_position.y+rand()%10-4));
 				}
 				Snake_beShorter(snake);
