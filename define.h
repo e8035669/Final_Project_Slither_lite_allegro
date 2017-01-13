@@ -1,5 +1,6 @@
 #ifndef _DEFINE_H_
 #define _DEFINE_H_
+/**< 定義的參數 */
 
 #define GRAPH_SIZE 2000         //picture's size
 #define PICTURE_NUM 5           //picture name from 0~PICTURE_NUM-1 ,each row and col

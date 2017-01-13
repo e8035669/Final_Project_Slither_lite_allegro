@@ -1,5 +1,6 @@
 #ifndef LIGHTSPOT_H
 #define LIGHTSPOT_H
+/**< 所有對亮點的操作 */
 #include "Structures.h"
 #include "Map.h"
 

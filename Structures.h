@@ -1,6 +1,6 @@
 #ifndef STRUCTURES_H
 #define STRUCTURES_H
-
+/**< ©Ò¦³µ²ºc */
 #include"kdebug/debug_c.h"
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
@@ -46,12 +46,12 @@ typedef struct LightSpotPos {
 	int index_y;
 } LightSpotPos;
 
-typedef struct LightSpotContainer{
+typedef struct LightSpotContainer {
 	ALLEGRO_MUTEX* writeMutex;
 	LightSpot* lightSpot;
 	int lightSpotLength;
 	int lightSpotSize;
-}LightSpotContainer;
+} LightSpotContainer;
 
 typedef struct Map {
 	LightSpotContainer* lightSpotContainers;

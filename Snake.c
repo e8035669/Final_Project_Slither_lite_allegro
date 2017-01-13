@@ -1,4 +1,10 @@
 #include "Snake.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
+#include <math.h>
+#include "OtherFunctions.h"
+#include "BodyStack.h"
 
 Snake* createSnake(Position position,char* name) {
 	Snake* snake = malloc(sizeof(Snake));
@@ -42,7 +48,7 @@ void moveSnake(Snake* snake,Mouse cursor,double speed) {
 		Body* head = Body_getHead(snake);
 		Body* tail = Body_getTail(snake);
 
-		double degree = atan2_dict(cursor.y,cursor.x);
+		double degree = atan2(cursor.y,cursor.x);
 		double tmp = degree-snake->headDirection;
 		if(tmp>M_PI)tmp-=(M_PI*2.0);
 		if(tmp<-M_PI)tmp+=(M_PI*2.0);
@@ -91,15 +97,30 @@ void Snake_rebirth(Snake* snakes[],int Ainumbers) {
 	int i;
 	for(i=1; i<Ainumbers; i++) {
 		if(snakes[i]->isDead==3) {
-			deleteSnake(snakes[i]);
-			char aiName[5];
-			sprintf(aiName,"%d",i);
+			snakes[i]->isDead = 0;
 			Position pos2 = p(rand()%10000,rand()%10000);
 			while(abs(pos1.x-pos2.x)<300||abs(pos1.y-pos2.y)<300) {
 				pos2.x = rand()%10000;
 				pos2.y = rand()%10000;
 			}
-			snakes[i] = createSnake(pos2,aiName);
+			snakes[i]->head->current_position = pos2;
+			int j;
+			for(j=snakes[i]->length; j<INIT_LENGTH; j++) {
+				Snake_beLonger(snakes[i]);
+			}
+			break;
 		}
+	}
+}
+
+
+
+int snakeSpeedDelta(int speedMax,int speedMin,int accelerate,int slowDown,int speed,int speedDelta) {
+	if(speed<=speedMin) {
+		return accelerate;
+	} else if(speed>=speedMax) {
+		return slowDown;
+	} else {
+		return speedDelta;
 	}
 }

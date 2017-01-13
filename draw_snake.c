@@ -1,7 +1,6 @@
 #include "draw_snake.h"
-
-
-
+#include "draw_map.h"
+#include <math.h>
 
 void Draw_Snake(Snake *snake,ALLEGRO_BITMAP *snake_body,ALLEGRO_BITMAP *snake_head,ALLEGRO_DISPLAY *display,Position center) {
 	if(snake->isDead==3)return;

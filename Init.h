@@ -1,10 +1,9 @@
 #ifndef INIT_H
 #define INIT_H
-
+/**< ¹CÀ¸ªì©l¤Æ */
 #include <stdlib.h>
 #include "define.h"
 #include "kdebug/debug_c.h"
-#include "atan2_dict.h"
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_audio.h>

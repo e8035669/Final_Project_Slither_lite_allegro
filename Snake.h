@@ -1,16 +1,9 @@
 #ifndef SNAKE_H
 #define SNAKE_H
-
+/**< 蛇的建立 刪除 移動 等基本動作 */
 #define INIT_LENGTH 10
 #include "Structures.h"
-#include "BodyStack.h"
-#include "OtherFunctions.h"
-#include <stdlib.h>
-#include <math.h>
-#include <assert.h>
-#include <string.h>
-#include "atan2_dict.h"
-#include "define.h"
+
 
 /** @brief 建立一隻蛇的Struct 並且初始化蛇的長度為10
  *	需要建立的位置 以及 蛇的名子
@@ -44,5 +37,18 @@ void moveSnake(Snake* snake,Mouse cursor,double speed);
 void aiSnakes(Snake* snakes[],int Ainumbers);
 
 void Snake_rebirth(Snake* snakes[],int Ainumbers);
+
+/** @brief return the speedDelta for snake
+ *
+ * @param speedMax int
+ * @param speedMin int
+ * @param accelerate int
+ * @param slowDown int
+ * @param speed int
+ * @param speedDelta int
+ * @return int
+ *
+ */
+int snakeSpeedDelta(int speedMax,int speedMin,int accelerate,int slowDown,int speed,int speedDelta);
 
 #endif // SNAKE_H

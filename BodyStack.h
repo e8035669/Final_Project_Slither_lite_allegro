@@ -1,7 +1,6 @@
 #ifndef BODYSTACK_H
 #define BODYSTACK_H
-
-#include "Snake.h"
+/**< 蛇的身體處理基本動作 */
 #include "Structures.h"
 #include <assert.h>
 #include <stdlib.h>

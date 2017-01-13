@@ -14,7 +14,7 @@ Mouse m(int x,int y) {
 	return m;
 }
 
-int pow2(int x){
+int pow2(int x) {
 	return x*x;
 }
 
@@ -32,22 +32,12 @@ void eatenMusic(ALLEGRO_EVENT event,Position center,ALLEGRO_SAMPLE *eat) {
 	if(distance2>distanceMax2) return;
 	else {
 		gain=1-(distance2*1.0)/distanceMax2;
-		pan=-(x*1.0)/(xMax*1.0);
-		if(x>=0) pan=pan+1;
-		else  pan=pan-1;
+		pan=(double)x/xMax;
+	//	if(x>=0) pan=pan+1;
+	//	else  pan=pan-1;
 
 		al_play_sample(eat,gain,pan,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 	}
 }
 
 
-
-int snakeSpeedDelta(int speedMax,int speedMin,int accelerate,int slowDown,int speed,int speedDelta) {
-	if(speed<=speedMin) {
-		return accelerate;
-	} else if(speed>=speedMax) {
-		return slowDown;
-	} else {
-		return speedDelta;
-	}
-}

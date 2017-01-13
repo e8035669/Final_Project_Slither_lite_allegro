@@ -1,5 +1,6 @@
 #ifndef OTHERFUNCTION_H
 #define OTHERFUNCTION_H
+/**< 其他尚未被歸類的funtion */
 #include <math.h>
 #include "Structures.h"
 #include <allegro5/allegro_audio.h>
@@ -15,16 +16,5 @@ void eatenMusic(ALLEGRO_EVENT event,Position center,ALLEGRO_SAMPLE *eat);
 int pow2(int x);
 
 
-/** @brief return the speedDelta for snake
- *
- * @param speedMax int
- * @param speedMin int
- * @param accelerate int
- * @param slowDown int
- * @param speed int
- * @param speedDelta int
- * @return int
- *
- */
-int snakeSpeedDelta(int speedMax,int speedMin,int accelerate,int slowDown,int speed,int speedDelta);
+
 #endif // OTHERFUNCTION_H

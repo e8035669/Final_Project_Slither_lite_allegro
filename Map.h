@@ -1,17 +1,9 @@
 #ifndef MAP_H
 #define MAP_H
-#include <stdlib.h>
-#include <math.h>
-#include "define.h"
+/**< 地圖的基本操作 建立 刪除 */
 #include "Structures.h"
-#include "draw_map.h"
-#include "Snake.h"
-#include <allegro5/allegro.h>
-#include "allegro5/allegro_audio.h"
-#include "OtherFunctions.h"
-#include "Lightspot.h"
 #define TOTAL_COLOR 5
-#define EAT_EVENT_TYPE ALLEGRO_GET_EVENT_TYPE('E','A','T','S')
+
 
 
 /** @brief 建立地圖的結構
@@ -31,25 +23,6 @@ Map* createMap(int mapSize,int lightSpot);
  */
 void deleteMap(Map* map);
 
-
-
-
-
-/** @brief 探測附近有沒有lightspot
- * 有的話就會吸過來吃掉
- * @param Body_getHead Body*
- * @param map Map*
- * @param snake Snake*
- * @return void
- *
- */
-void detectLightSpot(Map* map,Snake* snake,ALLEGRO_SAMPLE *eat,ALLEGRO_EVENT_SOURCE *eventSource);
-
-
-void outdeath(Snake* snakes[],int Ainumbers);
-void bodysdeath(Snake* snakes[],int Ainumbers,Map* map,int select);
-void deathAnimate(Snake* snake,Map* map);
-void AisBrain(Snake* snakes[],Mouse mouses[],int Ainumbers);
 
 void mapUpdateLightSpotData(Map* map);
 #endif // MAP_H

@@ -34,10 +34,22 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="AiFunction.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="AiFunction.h" />
+		<Unit filename="Animate.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Animate.h" />
 		<Unit filename="BodyStack.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="BodyStack.h" />
+		<Unit filename="ComputeTask.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ComputeTask.h" />
 		<Unit filename="Init.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -63,10 +75,6 @@
 		</Unit>
 		<Unit filename="Snake.h" />
 		<Unit filename="Structures.h" />
-		<Unit filename="atan2_dict.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="atan2_dict.h" />
 		<Unit filename="define.h" />
 		<Unit filename="draw_lightspot.c">
 			<Option compilerVar="CC" />

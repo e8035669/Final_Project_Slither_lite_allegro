@@ -1,5 +1,6 @@
 #ifndef DRAW_LIGHTSPOT_H
 #define DRAW_LIGHTSPOT_H
+/**< µe«GÂIªºfunction */
 
 #include "allegro5/allegro.h"
 #include "Structures.h"

@@ -1,5 +1,6 @@
 #ifndef _DRAW_MAP_H_
 #define _DRAW_MAP_H_
+/**< 畫地圖的function */
 
 #include "define.h"
 #include "Structures.h"

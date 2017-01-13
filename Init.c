@@ -90,7 +90,6 @@ void initResources() {
 		if(!al_attach_sample_instance_to_mixer(Res.slideSoundInstance,Res.defaultMixer)) LOG("attach sample instance to mixer fail");
 	}
 	LOG("%-30s[OK]","Allegro Resource Loading");
-	atan2DictInit();
 	return;
 ERR:
 	LOG("Loading File ERROR!!");

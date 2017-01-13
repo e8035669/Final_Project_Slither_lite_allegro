@@ -1,10 +1,9 @@
 #ifndef _DRAW_SNAKE_H_
 #define _DRAW_SNAKE_H_
+/**< 所有畫蛇的工作 */
 
 #include "define.h"
 #include "Structures.h"
-#include "draw_map.h"
-#include <math.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 

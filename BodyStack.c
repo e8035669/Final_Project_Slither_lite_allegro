@@ -1,5 +1,6 @@
 #include "BodyStack.h"
 
+#include <math.h>
 Body* Body_getHead(Snake* snake) {
 	return snake->head;
 }
