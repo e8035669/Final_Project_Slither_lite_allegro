@@ -9,22 +9,22 @@
 	</File>
 	<File name="src\Init.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="451" topLine="9" />
+			<Cursor1 position="451" topLine="10" />
 		</Cursor>
 	</File>
-	<File name="src\Init.c" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Init.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="7656" topLine="161" />
+			<Cursor1 position="10023" topLine="171" />
 		</Cursor>
 	</File>
-	<File name="src\main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6161" topLine="371" />
+			<Cursor1 position="14338" topLine="461" />
 		</Cursor>
 	</File>
 	<File name="src\OtherFunctions.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="353" topLine="1" />
+			<Cursor1 position="353" topLine="15" />
 		</Cursor>
 	</File>
 	<File name="src\Structures.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -37,9 +37,9 @@
 			<Cursor1 position="377" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\LevelSelect.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\LevelSelect.c" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="870" topLine="0" />
+			<Cursor1 position="68" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

@@ -120,12 +120,25 @@ int showMenu(char* retName) {
 						retCode = SELECT_LEVEL;
 						isDone = 1;
 						break;
+
 				}
 				if(event.keyboard.unichar>=32 && event.keyboard.unichar<=126) {
 					if(strlen(name)<sizeof(name)-1) {
 						name[strlen(name)] = event.keyboard.unichar;
 						isDisplayNeedRefresh = 1;
 					}
+				}
+				break;
+			case ALLEGRO_EVENT_KEY_DOWN:
+				if(event.keyboard.keycode==ALLEGRO_KEY_F11) {
+					if(ALLEGRO_FULLSCREEN_WINDOW&al_get_display_flags(Res.display)) {
+						al_set_display_flag(Res.display,ALLEGRO_FULLSCREEN_WINDOW,FALSE);
+					} else {
+						al_set_display_flag(Res.display,ALLEGRO_FULLSCREEN_WINDOW,TRUE);
+					}
+					screenH_2 = al_get_display_height(Res.display)>>1;
+					screenW_2 = al_get_display_width(Res.display)>>1;
+					isDisplayNeedRefresh = 1;
 				}
 				break;
 			case ALLEGRO_EVENT_MOUSE_AXES: {
@@ -380,6 +393,7 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 				al_acknowledge_resize(Res.display);
 				isDisplayNeedRefresh = 1;
 				break;
+
 			case EAT_EVENT_TYPE:
 				eatenMusic(event,snakes[keyIn_int]->head->current_position,Res.eatSound);
 				break;
@@ -412,6 +426,16 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 					if(lenth<sizeof(keyIn)-1) {
 						keyIn[lenth]=event.keyboard.unichar;
 					}
+				}
+				break;
+			case ALLEGRO_EVENT_KEY_DOWN:
+				if(event.keyboard.keycode==ALLEGRO_KEY_F11) {
+					if(ALLEGRO_FULLSCREEN_WINDOW&al_get_display_flags(Res.display)) {
+						al_set_display_flag(Res.display,ALLEGRO_FULLSCREEN_WINDOW,FALSE);
+					} else {
+						al_set_display_flag(Res.display,ALLEGRO_FULLSCREEN_WINDOW,TRUE);
+					}
+					isDisplayNeedRefresh = 1;
 				}
 				break;
 			case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -459,8 +483,6 @@ int showLeaderBoard() {
 	int tintColor = 0;
 	int isMouseFocusOn = 0;
 
-
-
 	ALLEGRO_FONT* font = al_load_ttf_font("assets/ARCHRISTY.ttf",30,0);
 	int screenH_2 = al_get_display_height(Res.display)>>1;
 	int screenW_2 = al_get_display_width(Res.display)>>1;
@@ -473,11 +495,24 @@ int showLeaderBoard() {
 				isDone = 1;
 				break;
 			case ALLEGRO_EVENT_KEY_DOWN:
-				if(event.keyboard.keycode==ALLEGRO_KEY_ENTER ||
-						event.keyboard.keycode==ALLEGRO_KEY_PAD_ENTER||
-						event.keyboard.keycode==ALLEGRO_KEY_ESCAPE)
-					retCode = ESC;
-				isDone = 1;
+				switch(event.keyboard.keycode) {
+					case ALLEGRO_KEY_ENTER :
+					case ALLEGRO_KEY_PAD_ENTER:
+					case ALLEGRO_KEY_ESCAPE:
+						retCode = ESC;
+						isDone = 1;
+						break;
+					case ALLEGRO_KEY_F11:
+						if(ALLEGRO_FULLSCREEN_WINDOW&al_get_display_flags(Res.display)) {
+							al_set_display_flag(Res.display,ALLEGRO_FULLSCREEN_WINDOW,FALSE);
+						} else {
+							al_set_display_flag(Res.display,ALLEGRO_FULLSCREEN_WINDOW,TRUE);
+						}
+						screenH_2 = al_get_display_height(Res.display)>>1;
+						screenW_2 = al_get_display_width(Res.display)>>1;
+						needRedraw = 1;
+						break;
+				}
 				break;
 			case ALLEGRO_EVENT_MOUSE_AXES: {
 					int dx = event.mouse.x-screenW_2;
@@ -585,6 +620,25 @@ int selectLevel(int levelNum) {
 			case ALLEGRO_EVENT_DISPLAY_CLOSE:
 				retCode=DISPLAY_CLOSE;
 				end=1;
+				break;
+			case ALLEGRO_EVENT_KEY_DOWN:
+				if(event.keyboard.keycode==ALLEGRO_KEY_F11) {
+					if(ALLEGRO_FULLSCREEN_WINDOW&al_get_display_flags(Res.display)) {
+						al_set_display_flag(Res.display,ALLEGRO_FULLSCREEN_WINDOW,FALSE);
+					} else {
+						al_set_display_flag(Res.display,ALLEGRO_FULLSCREEN_WINDOW,TRUE);
+					}
+					frameW=al_get_display_width(Res.display)/maxLevelRow;
+					frameH=al_get_display_height(Res.display)/maxLevelCol;
+					for(i=0; i<levelNum; i++) {
+						button[i].mouseOn=0;
+						button[i].width=frameW/2;
+						button[i].height=frameH/2;
+						button[i].startX=frameW*((i%maxLevelRow)+1.0/4);
+						button[i].startY=frameH*((i/maxLevelRow)+1.0/4);
+					}
+					screenNeedRefresh=1;
+				}
 				break;
 			case ALLEGRO_EVENT_DISPLAY_RESIZE:
 				al_acknowledge_resize(Res.display);

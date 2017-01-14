@@ -86,10 +86,6 @@
 		</Unit>
 		<Unit filename="src/Snake.h" />
 		<Unit filename="src/Structures.h" />
-		<Unit filename="src/atan2_dict.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="src/atan2_dict.h" />
 		<Unit filename="src/define.h" />
 		<Unit filename="src/draw_lightspot.c">
 			<Option compilerVar="CC" />
