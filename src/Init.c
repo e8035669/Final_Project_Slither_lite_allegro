@@ -24,6 +24,7 @@ void initResources() {
 	Res.eventQueue = al_create_event_queue();
 	Res.display = al_create_display(800,600);
 	Res.pongFont = al_load_ttf_font("assets/ARCHRISTY.ttf", 70, 0);
+	if(!Res.pongFont)goto ERR;
 	Res.builtinFont = al_create_builtin_font();
 	al_set_target_backbuffer(Res.display);
 	al_register_event_source(Res.eventQueue,al_get_display_event_source(Res.display));
@@ -32,16 +33,25 @@ void initResources() {
 	if(showInitScreen("assets/icon.png")&& !Res.icon)goto ERR;
 	al_set_display_icon(Res.display,Res.icon);
 
-
+	Res.pianpianFont = al_load_ttf_font("assets/pianpian.ttf",70,0);
+	if(showInitScreen("assets/pianpian.ttf")&&!Res.pianpianFont)goto ERR;
 
 	Res.start = al_load_bitmap( "assets/start.jpg");
 	if(showInitScreen("assets/start.jpg")&&!Res.start )goto ERR;
-	Res.start_button = al_load_bitmap( "assets/start_button.png");
-	if(showInitScreen("assets/start_button.png")&& !Res.start_button)goto ERR;
-	Res.start_button_blink = al_load_bitmap( "assets/start_button_blink.png");
-	if(showInitScreen("assets/start_button_blink.png")&& !Res.start_button_blink)goto ERR;
-	Res.replayButton = al_load_bitmap("assets/replayButton.png");
-	if(showInitScreen("assets/replayButton.png")&& !Res.replayButton)goto ERR;
+	Res.start_button = al_load_bitmap( "assets/buttons/start_button.png");
+	if(showInitScreen("assets/buttons/start_button.png")&& !Res.start_button)goto ERR;
+	Res.start_button_blink = al_load_bitmap( "assets/buttons/start_button_blink.png");
+	if(showInitScreen("assets/buttons/start_button_blink.png")&& !Res.start_button_blink)goto ERR;
+	Res.replayButton = al_load_bitmap("assets/buttons/replayButton.png");
+	if(showInitScreen("assets/buttons/replayButton.png")&& !Res.replayButton)goto ERR;
+	Res.copyrightButton = al_load_bitmap("assets/buttons/copyrightButton.png");
+	if(showInitScreen("assets/buttons/copyrightButton.png")&& !Res.copyrightButton)goto ERR;
+	Res.copyrightButton_blink = al_load_bitmap("assets/buttons/copyrightButton_blink.png");
+	if(showInitScreen("assets/buttons/copyrightButton_blink.png")&& !Res.copyrightButton_blink)goto ERR;
+	Res.leaderBoardButton = al_load_bitmap("assets/buttons/leaderBoardButton.png");
+	if(showInitScreen("assets/buttons/leaderBoardButton.png")&& !Res.leaderBoardButton)goto ERR;
+	Res.leaderBoardButton_blink = al_load_bitmap("assets/buttons/leaderBoardButton_blink.png");
+	if(showInitScreen("assets/buttons/leaderBoardButton_blink.png")&& !Res.leaderBoardButton_blink)goto ERR;
 
 
 	Res.bitmap = (ALLEGRO_BITMAP***)calloc(sizeof(ALLEGRO_BITMAP*),PICTURE_NUM);
@@ -95,6 +105,8 @@ void initResources() {
 		if(!al_attach_sample_instance_to_mixer(Res.slideSoundInstance,Res.defaultMixer)) LOG("attach sample instance to mixer fail");
 	}
 	LOG("%-30s[OK]","Allegro Resource Loading");
+	/**< 遊戲背景音樂 */
+	al_play_sample(Res.bgMusic,1.0,ALLEGRO_AUDIO_PAN_NONE,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
 	return;
 ERR:
 	LOG("Loading File ERROR!!");
@@ -110,6 +122,12 @@ void destroy() {
 	al_destroy_bitmap(Res.start);
 	al_destroy_bitmap(Res.start_button);
 	al_destroy_bitmap(Res.start_button_blink);
+	al_destroy_bitmap(Res.icon);
+	al_destroy_bitmap(Res.replayButton);
+	al_destroy_bitmap(Res.copyrightButton);
+	al_destroy_bitmap(Res.copyrightButton_blink);
+	al_destroy_bitmap(Res.leaderBoardButton);
+	al_destroy_bitmap(Res.leaderBoardButton_blink);
 	int i,j;
 	for(i=0; i<PICTURE_NUM; i++) {
 		for(j=0; j<PICTURE_NUM; j++) {
@@ -150,28 +168,24 @@ int showInitScreen(char* itemName) {
 
 void punishHandle() {
 	al_show_native_message_box(Res.display,"\u4f60\u5b8c\u86cb\u4e86",
-								"\u6a94\u6848\u8b80\u53d6\u6642\u767c\u751f\u932f\u8aa4",
-								"\u6216\u8a31\u9700\u8981\u91cd\u65b0\u5b89\u88dd"
-								,NULL,ALLEGRO_MESSAGEBOX_ERROR);
-								/**< 你完蛋了 */
-								/**< 檔案讀取時發生錯誤 */
-								/**< 或許需要重新安裝 */
-
+							   "\u6a94\u6848\u8b80\u53d6\u6642\u767c\u751f\u932f\u8aa4",
+							   "\u6216\u8a31\u9700\u8981\u91cd\u65b0\u5b89\u88dd"
+							   ,NULL,ALLEGRO_MESSAGEBOX_ERROR);
+	/**< 你完蛋了 */
+	/**< 檔案讀取時發生錯誤 */
+	/**< 或許需要重新安裝 */
 	int k=1001;
-	while(--k){
+	while(--k) {
 		char tmp[100];
 		sprintf(tmp,"\u7f70\u4f60\u518d\u6309 %d \u4e0bEnter\u624d\u80fd\u7d50\u675f",k);
 		al_show_native_message_box(Res.display,"\u6211\u5f88\u751f\u6c23",
-								"\u56e0\u70ba\u4f60\u628a\u6211\u7684\u7a0b\u5f0f\u5f04\u58de\u4e86",
-								tmp,NULL,ALLEGRO_MESSAGEBOX_ERROR);
-								/**< 我很生氣 */
-								/**< 因為你把我的程式弄壞了 */
-								/**< 罰你再按 k 下Enter才能結束 */
+								   "\u56e0\u70ba\u4f60\u628a\u6211\u7684\u7a0b\u5f0f\u5f04\u58de\u4e86",
+								   tmp,NULL,ALLEGRO_MESSAGEBOX_ERROR);
+		/**< 我很生氣 */
+		/**< 因為你把我的程式弄壞了 */
+		/**< 罰你再按 k 下Enter才能結束 */
 	}
 }
-
-
-
 
 
 struct _Resources Res;

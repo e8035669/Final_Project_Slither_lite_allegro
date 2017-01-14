@@ -14,8 +14,10 @@
 
 struct _Resources {
 	ALLEGRO_DISPLAY* display;
-	ALLEGRO_FONT *pongFont,*builtinFont;
+	ALLEGRO_FONT *pongFont,*builtinFont,*pianpianFont;
 	ALLEGRO_BITMAP *start,*start_button,*start_button_blink,*icon,*replayButton;
+	ALLEGRO_BITMAP *copyrightButton,*copyrightButton_blink;
+	ALLEGRO_BITMAP *leaderBoardButton,*leaderBoardButton_blink;
 	ALLEGRO_BITMAP ***bitmap,*snake_body,*snake_head,*lightspot;
 	ALLEGRO_TIMER* timer;
 	ALLEGRO_EVENT_QUEUE* eventQueue;

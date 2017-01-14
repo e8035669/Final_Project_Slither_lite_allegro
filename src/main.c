@@ -90,7 +90,13 @@ int showMenu(char* retName) {
 	int retCode = 0;
 	int isDisplayNeedRefresh = 1;
 	int isFocusOnPlay = 0;
+	int isFocusOnCopyRight = 0;
+	int isFocusOnLeaderBoard = 0;
+
+
 	char name[10] = "";
+	int screenH_2 = al_get_display_height(Res.display)>>1;
+	int screenW_2 = al_get_display_width(Res.display)>>1;
 
 	while(!isDone) {
 		al_wait_for_event(Res.eventQueue,&event);
@@ -121,20 +127,66 @@ int showMenu(char* retName) {
 					}
 				}
 				break;
-			case ALLEGRO_EVENT_MOUSE_AXES:
-				if(abs(event.mouse.x-(al_get_display_width(Res.display)>>1))<90 && abs(event.mouse.y-(al_get_display_height(Res.display)>>1)-120)<90) {
-					isFocusOnPlay = 1;
-					isDisplayNeedRefresh = 1;
-				} else {
-					isFocusOnPlay = 0;
-					isDisplayNeedRefresh = 1;
+			case ALLEGRO_EVENT_MOUSE_AXES: {
+					int dx = event.mouse.x-screenW_2;
+					int dy = event.mouse.y-screenH_2-118;
+					if(dx*dx+dy*dy<76*76) {
+						isFocusOnPlay = 1;
+						isDisplayNeedRefresh = 1;
+					} else {
+						isFocusOnPlay = 0;
+						isDisplayNeedRefresh = 1;
+					}
+				}{
+					int dx = event.mouse.x-screenW_2+230;
+					int dy = event.mouse.y-screenH_2-118;
+					if(dx*dx+dy*dy<76*76) {
+						isFocusOnCopyRight = 1;
+						isDisplayNeedRefresh = 1;
+					} else {
+						isFocusOnCopyRight = 0;
+						isDisplayNeedRefresh = 1;
+					}
+
+				}{
+					int dx = event.mouse.x-screenW_2-230;
+					int dy = event.mouse.y-screenH_2-118;
+					if(dx*dx+dy*dy<76*76) {
+						isFocusOnLeaderBoard = 1;
+						isDisplayNeedRefresh = 1;
+					} else {
+						isFocusOnLeaderBoard = 0;
+						isDisplayNeedRefresh = 1;
+					}
 				}
+
+
 				break;
-			case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-				if(abs(event.mouse.x-al_get_display_width(Res.display)/2)<90 && abs(event.mouse.y-al_get_display_height(Res.display)/2-120)<90) {
-					strcpy(retName,name);
-					retCode = SELECT_LEVEL;
-					isDone = 1;
+			case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN: {
+					int dx = event.mouse.x-screenW_2;
+					int dy = event.mouse.y-screenH_2-118;
+					if(dx*dx+dy*dy<76*76) {
+						strcpy(retName,name);
+						retCode = SELECT_LEVEL;
+						isDone = 1;
+					}
+				}
+				{
+					int dx = event.mouse.x-screenW_2+230;
+					int dy = event.mouse.y-screenH_2-118;
+					if(dx*dx+dy*dy<76*76) {
+						/**< 這裡放開啟copyright的txt檔!! */
+						retCode = -1;
+						isDone = 1;
+					}
+				}
+				{
+					int dx = event.mouse.x-screenW_2-230;
+					int dy = event.mouse.y-screenH_2-118;
+					if(dx*dx+dy*dy<76*76) {
+						retCode = LEADERBOARD;
+						isDone = 1;
+					}
 				}
 				break;
 			case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -148,17 +200,31 @@ int showMenu(char* retName) {
 					al_draw_scaled_bitmap(Res.start,0,0,al_get_bitmap_width(Res.start),al_get_bitmap_height(Res.start)
 										  ,0,0,al_get_display_width(Res.display),al_get_display_height(Res.display),0);
 					if(isFocusOnPlay) {
-						al_draw_bitmap(Res.start_button_blink,al_get_display_width(Res.display)/2-150,al_get_display_height(Res.display)/2, 0);
+						al_draw_bitmap(Res.start_button_blink,screenW_2-150,screenH_2, 0);
 					} else {
-						al_draw_bitmap(Res.start_button,al_get_display_width(Res.display)/2-150,al_get_display_height(Res.display)/2, 0);
+						al_draw_bitmap(Res.start_button,screenW_2-150,screenH_2, 0);
 					}
-					al_draw_textf(Res.pongFont, al_map_rgba(110, 239, 35,254), al_get_display_width(Res.display)/2, 100, ALLEGRO_ALIGN_CENTRE, "Enter your name:");
-					al_draw_textf(Res.pongFont,al_map_rgba(209,27,27,255),al_get_display_width(Res.display)/2,200,ALLEGRO_ALIGN_CENTRE,"%s",name);
+					if(isFocusOnCopyRight) {
+						al_draw_bitmap(Res.copyrightButton_blink,screenW_2-150-230,screenH_2, 0);
+					} else {
+						al_draw_bitmap(Res.copyrightButton,screenW_2-150-230,screenH_2, 0);
+					}
+					if(isFocusOnLeaderBoard) {
+						al_draw_bitmap(Res.leaderBoardButton_blink,screenW_2-150+230,screenH_2, 0);
+					} else {
+						al_draw_bitmap(Res.leaderBoardButton,screenW_2-150+230,screenH_2, 0);
+					}
+					al_draw_textf(Res.pianpianFont,al_map_rgba(110,239,35,254),screenW_2,100,ALLEGRO_ALIGN_CENTRE,
+									"\u8acb\u8f38\u5165\u66b1\u7a31:");
+									/**< 請輸入暱稱 */
+					al_draw_textf(Res.pianpianFont,al_map_rgba(209,27,27,255),screenW_2,200,ALLEGRO_ALIGN_CENTER,"%s",name);
 					al_flip_display();
 				}
 				break;
 			case ALLEGRO_EVENT_DISPLAY_RESIZE:
 				al_acknowledge_resize(Res.display);
+				screenH_2 = al_get_display_height(Res.display)>>1;
+				screenW_2 = al_get_display_width(Res.display)>>1;
 				isDisplayNeedRefresh = 1;
 				break;
 		}
@@ -203,8 +269,6 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 	/**< 殺蛇幾隻 一隻加1000分 */
 	int killCount = 0;
 
-	/**< 遊戲背景音樂 */
-	al_play_sample(Res.bgMusic,1.0,ALLEGRO_AUDIO_PAN_NONE,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
 	al_flush_event_queue(Res.eventQueue);
 
 
@@ -453,6 +517,7 @@ int showLeaderBoard() {
 					al_draw_tinted_bitmap(Res.replayButton,al_map_rgba(127+tintColor,127+tintColor,127+tintColor,127+tintColor),
 										  screenW_2-(al_get_bitmap_width(Res.replayButton)>>1),screenH_2+110,0);
 					al_flip_display();
+					needRedraw = 0;
 				}
 				if(isMouseFocusOn) {
 					if(tintColor<125) {

@@ -6,11 +6,11 @@
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{02D022E0-659B-41CA-AF18-A4A00A933C8B}
-AppName=Slither_lite
-AppVersion=0.9.0
+AppName=貪吃蛇的危機
+AppVersion=0.9.1
 ;AppVerName=Slither_lite 0.9.0
-AppPublisher=My Company, Inc.
-AppPublisherURL=http://www.example.com/
+AppPublisher=家瀚工具股份有限公司
+AppPublisherURL=http://www.ical.tw/
 AppSupportURL=http://www.example.com/
 AppUpdatesURL=http://www.example.com/
 DefaultDirName={pf}\Slither_Lite
@@ -19,8 +19,9 @@ InfoAfterFile=D:\CodeBlocks_HW\Final_Project_Slither_lite_allegro\CopyRight.md
 LicenseFile=D:\CodeBlocks_HW\Final_Project_Slither_lite_allegro\CopyRight.md
 OutputBaseFilename=setup
 SetupIconFile=D:\CodeBlocks_HW\Final_Project_Slither_lite_allegro\assets\icon.ico
-Compression=lzma
 SolidCompression=yes
+InfoBeforeFile=D:\CodeBlocks_HW\Final_Project_Slither_lite_allegro\CopyRight.md
+Uninstallable=yes
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
