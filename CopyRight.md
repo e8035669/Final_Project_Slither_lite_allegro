@@ -1,5 +1,5 @@
 COPYRIGHT
-===
+=========
 
 ---
 this project is to practice programming in **C Language** with **allegro** , **Department of Electrical Engineering of National University of Kaohsiung** have a course named *Computer programming*  taught by **Dr. Chih-Hung Wu**, we do this project in this course .
@@ -10,6 +10,7 @@ listed below are sources we used in the project .
 - [start button](http://www.lookscloudy.com/wp-content/uploads/start_button.jpg) in _assets/start_button.png_
 - [start button blinked](http://www.lookscloudy.com/wp-content/uploads/start_button.jpg) modified in _assets/start_button_blink.png_
 - other pictures is drawn and modified by ourselves
+
 ### Reference
 this project is referenced to [slither.io](http://slither.io/)
 
