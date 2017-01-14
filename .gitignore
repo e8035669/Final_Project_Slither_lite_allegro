@@ -82,4 +82,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-/assets/*
+assets/*
+*.png
+*.jpg
+*.jpeg
