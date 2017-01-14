@@ -27,23 +27,53 @@
 #include "AiFunction.h"
 #include "Animate.h"
 #include "BodyStack.h"
+#include "LevelSelect.h"
 
 int showMenu(char* retName);
 int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** snakes,Mouse* mouses,int Ainumbers));
 int showLeaderBoard();
+int selectLevel(int levelNum);
+enum RetCode {
+	ESC=-2,DISPLAY_CLOSE,
+	MENU=1,SELECT_LEVEL,LEADERBOARD,
+	LEVEL1=11,LEVEL2,LEVEL3
+};
 int main() {
 	srand((unsigned int)time(NULL));
 	init();
 	initResources();
-	int retCode = 0;
-	char name[20] = "";
-	retCode = showMenu(name);
-	if(!retCode) {
-		mainGameLoop(name,500,10000,AisBrain);
+	enum RetCode retCode = MENU;
+	char name[10] = "";
+	while(retCode!=DISPLAY_CLOSE) {
+		switch (retCode) {
+			case ESC:/**< ESC */
+				retCode = -1;
+			case DISPLAY_CLOSE:/**< display close */
+				break;
+			case MENU:/**< menu */
+				retCode=showMenu(name);
+				break;
+			case SELECT_LEVEL:/**< select level */
+				retCode=selectLevel(3);
+				break;
+			case LEADERBOARD:/**< leaderboard */
+				retCode = showLeaderBoard();
+				break;
+			case LEVEL1:/**< level 1 */
+				retCode=mainGameLoop(name,100,2000,AiDefault);
+				break;
+			case LEVEL2:/**< level 2 */
+				retCode=mainGameLoop(name,300,6000,AisBrain);
+				break;
+			case LEVEL3:/**< level 3 */
+				retCode=mainGameLoop(name,500,0,Aiattack);
+				break;
+			default:
+				LOG("returnCode=%d and error now",retCode);
+				retCode = -1;
+				break;
+		}
 	}
-	mainGameLoop(name,500,0,Aiattack);
-	showLeaderBoard();
-
 	/*死掉後要新增一筆遊玩紀錄
 		並且顯示排行榜前十名*/
 
@@ -68,7 +98,7 @@ int showMenu(char* retName) {
 			case ALLEGRO_EVENT_KEY_CHAR:
 				switch(event.keyboard.keycode) {
 					case ALLEGRO_KEY_ESCAPE:
-						retCode = -1;
+						retCode = ESC;
 						isDone = 1;
 						break;
 					case ALLEGRO_KEY_BACKSPACE:
@@ -80,7 +110,7 @@ int showMenu(char* retName) {
 					case ALLEGRO_KEY_ENTER:
 					case ALLEGRO_KEY_PAD_ENTER:
 						strcpy(retName,name);
-						retCode = 0;
+						retCode = SELECT_LEVEL;
 						isDone = 1;
 						break;
 				}
@@ -103,12 +133,12 @@ int showMenu(char* retName) {
 			case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
 				if(abs(event.mouse.x-al_get_display_width(Res.display)/2)<90 && abs(event.mouse.y-al_get_display_height(Res.display)/2-120)<90) {
 					strcpy(retName,name);
-					retCode = 0;
+					retCode = SELECT_LEVEL;
 					isDone = 1;
 				}
 				break;
 			case ALLEGRO_EVENT_DISPLAY_CLOSE:
-				retCode = -1;
+				retCode = DISPLAY_CLOSE;
 				isDone = 1;
 				break;
 			case ALLEGRO_EVENT_TIMER:
@@ -171,7 +201,7 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 	int isDisplayNeedRefresh = 1;
 
 	/**< 殺蛇幾隻 一隻加1000分 */
-    int killCount = 0;
+	int killCount = 0;
 
 	/**< 遊戲背景音樂 */
 	al_play_sample(Res.bgMusic,1.0,ALLEGRO_AUDIO_PAN_NONE,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
@@ -273,7 +303,10 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 							Put_LightSpot(map,Create_LightSpot(map->size));
 						}
 					}
-					if(snake->isDead==3)isDone = 1;
+					if(snake->isDead==3) {
+						retCode = LEADERBOARD;
+						isDone = 1;
+					}
 					isDisplayNeedRefresh = 1;
 				}
 				break;
@@ -287,10 +320,10 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 			case DEAD_EVENT:
 				if(event.user.data1==0) {
 					LeaderBoard_insertNewRecord(snake->name,event.user.data3+killCount*1000);
-				}else{
-                    if(event.user.data4==2&&event.user.data2==0){
+				} else {
+					if(event.user.data4==2&&event.user.data2==0) {
 						killCount++;
-                    }
+					}
 				}
 				break;
 			case ALLEGRO_EVENT_KEY_CHAR:
@@ -316,7 +349,7 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 				}
 				break;
 			case ALLEGRO_EVENT_DISPLAY_CLOSE:
-				retCode = -1;
+				retCode = DISPLAY_CLOSE;
 				isDone = 1;
 				break;
 		}
@@ -350,6 +383,7 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 	return retCode;
 }
 
+/**< Leader Board */
 int showLeaderBoard() {
 	int count = LeaderBoard_getRecordCount();
 	Record* records = LeaderBoard_getRecordData(count);
@@ -364,14 +398,14 @@ int showLeaderBoard() {
 		al_wait_for_event(Res.eventQueue,&event);
 		switch(event.type) {
 			case ALLEGRO_EVENT_DISPLAY_CLOSE:
-				retCode = -1;
+				retCode = DISPLAY_CLOSE;
 				isDone = 1;
 				break;
 			case ALLEGRO_EVENT_KEY_DOWN:
 				if(event.keyboard.keycode==ALLEGRO_KEY_ENTER ||
 						event.keyboard.keycode==ALLEGRO_KEY_PAD_ENTER||
 						event.keyboard.keycode==ALLEGRO_KEY_ESCAPE)
-					retCode = -1;
+					retCode = ESC;
 				isDone = 1;
 				break;
 			case ALLEGRO_EVENT_TIMER:
@@ -405,9 +439,95 @@ int showLeaderBoard() {
 
 		}
 	}
+	free(records);
+	al_destroy_font(font);
 	return retCode;
 }
 
+/**< 關卡選擇 */
+int selectLevel(int levelNum) {
+	Button *button;
+	button=malloc(sizeof(Button)*levelNum);
+	if(!button) {
+		LOG("button memory allocation fail");
+		return -1;
+	}
 
+	int i,retCode=0;
+	int end=0,screenNeedRefresh=1;
+	int maxLevelRow=3,maxLevelCol=1;
+	int frameW=al_get_display_width(Res.display)/maxLevelRow;
+	int frameH=al_get_display_height(Res.display)/maxLevelCol;
+
+	if(maxLevelRow*maxLevelCol < levelNum) {
+		LOG("button level number error");
+		return -1;
+	}
+
+	ALLEGRO_FONT *font=al_load_ttf_font("assets/ARCHRISTY.ttf", 50, 0);
+	ALLEGRO_FONT *mouseOnFont=al_load_ttf_font("assets/ARCHRISTY.ttf", 90, 0);
+
+	for(i=0; i<levelNum; i++) {
+		button[i].mouseOn=0;
+		button[i].width=frameW/2;
+		button[i].height=frameH/2;
+		button[i].startX=frameW*((i%maxLevelRow)+1.0/4);
+		button[i].startY=frameH*((i/maxLevelRow)+1.0/4);
+	}
+
+	while(!end) {
+		ALLEGRO_EVENT event;
+		al_wait_for_event(Res.eventQueue,&event);
+		switch (event.type) {
+			case ALLEGRO_EVENT_DISPLAY_CLOSE:
+				retCode=DISPLAY_CLOSE;
+				end=1;
+				break;
+			case ALLEGRO_EVENT_DISPLAY_RESIZE:
+				al_acknowledge_resize(Res.display);
+				frameW=al_get_display_width(Res.display)/maxLevelRow;
+				frameH=al_get_display_height(Res.display)/maxLevelCol;
+				for(i=0; i<levelNum; i++) {
+					button[i].mouseOn=0;
+					button[i].width=frameW/2;
+					button[i].height=frameH/2;
+					button[i].startX=frameW*((i%maxLevelRow)+1.0/4);
+					button[i].startY=frameH*((i/maxLevelRow)+1.0/4);
+				}
+				screenNeedRefresh=1;
+				break;
+			case ALLEGRO_EVENT_KEY_CHAR:
+				if(event.keyboard.keycode==ALLEGRO_KEY_ESCAPE) {
+					retCode=ESC;
+					end=1;
+				}
+				break;
+			case ALLEGRO_EVENT_MOUSE_AXES:
+				setMouseOn(&event.mouse,button,levelNum);
+				screenNeedRefresh=1;
+				break;
+			case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+				retCode=mouseClick(&event.mouse,button,levelNum);
+				if(retCode!=0 && retCode!=-1) {
+					retCode+=10;
+					end=1;
+				}
+				break;
+		}
+		if(screenNeedRefresh) {
+			screenNeedRefresh=0;
+			al_clear_to_color(al_map_rgb(0,0,0));
+			al_draw_scaled_bitmap(Res.start,0,0,al_get_bitmap_width(Res.start),al_get_bitmap_height(Res.start)
+										  ,0,0,al_get_display_width(Res.display),al_get_display_height(Res.display),0);
+			drawButton(levelNum,button,font,mouseOnFont);
+			al_flip_display();
+		}
+	}
+
+	free(button);
+	al_destroy_font(font);
+	al_destroy_font(mouseOnFont);
+	return retCode;
+}
 
 

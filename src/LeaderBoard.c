@@ -20,11 +20,11 @@ void LeaderBoard_insertNewRecord(char name[],int score) {
 	count++;
 	LeaderBoard_sortRecord(records,count);
 	if(count>10) {
-		FILE* file = fopen("data1","wb");
+		FILE* file = fopen("assets/data.bin","wb");
 		fwrite(records,sizeof(Record),10,file);
 		fclose(file);
 	} else {
-		FILE* file = fopen("data1","wb");
+		FILE* file = fopen("assets/data.bin","wb");
 		fwrite(records,sizeof(Record),count,file);
 		fclose(file);
 	}
@@ -32,8 +32,8 @@ void LeaderBoard_insertNewRecord(char name[],int score) {
 
 int LeaderBoard_getRecordCount() {
 	int count=0;
-	fclose(fopen("data1","a"));
-	FILE *fp = fopen("data1","rb");
+	fclose(fopen("assets/data.bin","a"));
+	FILE *fp = fopen("assets/data.bin","rb");
 	if(fp) {
 		Record tmp;
 		while (fread(&tmp,sizeof(Record),1,fp)) {
@@ -47,8 +47,8 @@ int LeaderBoard_getRecordCount() {
 }
 
 Record* LeaderBoard_getRecordData(int count) {
-	fclose(fopen("data1","a"));
-	FILE *fp = fopen("data1","rb");
+	fclose(fopen("assets/data.bin","a"));
+	FILE *fp = fopen("assets/data.bin","rb");
 	if(fp) {
 		Record* records = malloc(count*sizeof(Record));
 		int inputCount = fread(records,sizeof(Record),count,fp);

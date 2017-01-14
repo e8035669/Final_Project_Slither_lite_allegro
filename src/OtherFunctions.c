@@ -33,8 +33,6 @@ void eatenMusic(ALLEGRO_EVENT event,Position center,ALLEGRO_SAMPLE *eat) {
 	else {
 		gain=1-(distance2*1.0)/distanceMax2;
 		pan=(double)x/xMax;
-	//	if(x>=0) pan=pan+1;
-	//	else  pan=pan-1;
 
 		al_play_sample(eat,gain,pan,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 	}

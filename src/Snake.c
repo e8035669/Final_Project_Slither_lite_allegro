@@ -14,7 +14,7 @@ Snake* createSnake(Position position,char* name) {
 	snake->picSize = 0;
 
 	Body* firstBody = malloc(sizeof(Body));
-	firstBody->color = 1;
+	firstBody->color = al_map_rgba(rand()%255,rand()%255,rand()%255,255-rand()%50);
 	firstBody->current_position = position;
 	firstBody->next = NULL;
 	firstBody->prev = NULL;

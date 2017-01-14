@@ -34,64 +34,72 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="AiFunction.c">
+		<Unit filename="src/AiFunction.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="AiFunction.h" />
-		<Unit filename="Animate.c">
+		<Unit filename="src/AiFunction.h" />
+		<Unit filename="src/Animate.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Animate.h" />
-		<Unit filename="BodyStack.c">
+		<Unit filename="src/Animate.h" />
+		<Unit filename="src/BodyStack.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="BodyStack.h" />
-		<Unit filename="ComputeTask.c">
+		<Unit filename="src/BodyStack.h" />
+		<Unit filename="src/ComputeTask.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="ComputeTask.h" />
-		<Unit filename="Init.c">
+		<Unit filename="src/ComputeTask.h" />
+		<Unit filename="src/Init.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Init.h" />
-		<Unit filename="LeaderBoard.c">
+		<Unit filename="src/Init.h" />
+		<Unit filename="src/LeaderBoard.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="LeaderBoard.h" />
-		<Unit filename="Lightspot.c">
+		<Unit filename="src/LeaderBoard.h" />
+		<Unit filename="src/LevelSelect.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Lightspot.h" />
-		<Unit filename="Map.c">
+		<Unit filename="src/LevelSelect.h" />
+		<Unit filename="src/Lightspot.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Map.h" />
-		<Unit filename="OtherFunctions.c">
+		<Unit filename="src/Lightspot.h" />
+		<Unit filename="src/Map.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="OtherFunctions.h" />
-		<Unit filename="Snake.c">
+		<Unit filename="src/Map.h" />
+		<Unit filename="src/OtherFunctions.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Snake.h" />
-		<Unit filename="Structures.h" />
-		<Unit filename="define.h" />
-		<Unit filename="draw_lightspot.c">
+		<Unit filename="src/OtherFunctions.h" />
+		<Unit filename="src/Snake.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="draw_lightspot.h" />
-		<Unit filename="draw_map.c">
+		<Unit filename="src/Snake.h" />
+		<Unit filename="src/Structures.h" />
+		<Unit filename="src/atan2_dict.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="draw_map.h" />
-		<Unit filename="draw_snake.c">
+		<Unit filename="src/atan2_dict.h" />
+		<Unit filename="src/define.h" />
+		<Unit filename="src/draw_lightspot.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="draw_snake.h" />
-		<Unit filename="main.c">
+		<Unit filename="src/draw_lightspot.h" />
+		<Unit filename="src/draw_map.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="main.rc">
+		<Unit filename="src/draw_map.h" />
+		<Unit filename="src/draw_snake.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/draw_snake.h" />
+		<Unit filename="src/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/main.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
 		<Extensions>

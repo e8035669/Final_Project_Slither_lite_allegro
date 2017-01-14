@@ -28,7 +28,9 @@ void Draw_Snake(Snake *snake,ALLEGRO_BITMAP *snake_body,ALLEGRO_BITMAP *snake_he
 				Draw_Snake_Head(snake,center,picture_size,snake_head,display);
 				return;
 			} else {
-				al_draw_scaled_bitmap(snake_body,0,0,SNAKE_GRAPH_SIZE,SNAKE_GRAPH_SIZE,Pos(current_x,center.x,display,0)-picture_size/2,Pos(current_y,center.y,display,1)-picture_size/2,picture_size,picture_size,0);
+				al_draw_tinted_scaled_bitmap(snake_body,current_body->color,0,0,
+											 SNAKE_GRAPH_SIZE,SNAKE_GRAPH_SIZE,Pos(current_x,center.x,display,0)-picture_size/2,
+											 Pos(current_y,center.y,display,1)-picture_size/2,picture_size,picture_size,0);
 			}
 		} else if(current_body->prev==NULL) return;
 		current_body=current_body->prev;

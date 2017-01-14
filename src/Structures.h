@@ -4,6 +4,7 @@
 #include"kdebug/debug_c.h"
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
+
 typedef struct Position {
 	double x;
 	double y;
@@ -18,7 +19,7 @@ typedef struct Body {
 	struct Body* prev;
 
 	int type;
-	int color;
+	ALLEGRO_COLOR color;
 	Position current_position;
 //	Position next_position;
 

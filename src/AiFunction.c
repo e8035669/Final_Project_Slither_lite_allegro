@@ -41,6 +41,6 @@ void Aiattack(Snake* snakes[],Mouse mouses[],int Ainumbers) {
 	}
 }
 
-void AiDeafult(Snake* snakes[],Mouse mouses[],int Ainumbers){
+void AiDefault(Snake* snakes[],Mouse mouses[],int Ainumbers){
 }
 
