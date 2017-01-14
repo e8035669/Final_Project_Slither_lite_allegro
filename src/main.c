@@ -390,6 +390,11 @@ int showLeaderBoard() {
 	int retCode = 0;
 	int isDone = 0;
 	int needRedraw = 1;
+	int tintColor = 0;
+	int isMouseFocusOn = 0;
+
+
+
 	ALLEGRO_FONT* font = al_load_ttf_font("assets/ARCHRISTY.ttf",30,0);
 	int screenH_2 = al_get_display_height(Res.display)>>1;
 	int screenW_2 = al_get_display_width(Res.display)>>1;
@@ -408,14 +413,32 @@ int showLeaderBoard() {
 					retCode = ESC;
 				isDone = 1;
 				break;
+			case ALLEGRO_EVENT_MOUSE_AXES: {
+					int dx = event.mouse.x-screenW_2;
+					int dy = event.mouse.y-(screenH_2+110+(al_get_bitmap_height(Res.replayButton)>>1));
+					if(pow2(dx)+pow2(dy)<pow2(al_get_bitmap_width(Res.replayButton)>>1)) {
+						isMouseFocusOn = 1;
+					} else {
+						isMouseFocusOn = 0;
+					}
+				}
+				break;
+			case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN: {
+					int dx = event.mouse.x-screenW_2;
+					int dy = event.mouse.y-(screenH_2+110+(al_get_bitmap_height(Res.replayButton)>>1));
+					if(pow2(dx)+pow2(dy)<pow2(al_get_bitmap_width(Res.replayButton)>>1)) {
+						retCode = MENU;
+						isDone = 1;
+					}
+				}
 			case ALLEGRO_EVENT_TIMER:
 				if(needRedraw) {
 					al_clear_to_color(al_map_rgb(0,0,0));
 					al_draw_scaled_bitmap(Res.start,0,0,al_get_bitmap_width(Res.start),al_get_bitmap_height(Res.start)
 										  ,0,0,al_get_display_width(Res.display),al_get_display_height(Res.display),0);
 
-					int up = -150;
-					al_draw_filled_rounded_rectangle(screenW_2-350,screenH_2+up-90,screenW_2+350,screenH_2+up+(count+1)*30,20,20,al_map_rgba(0,0,0,100));
+					int up = -200;
+					al_draw_filled_rounded_rectangle(screenW_2-350,screenH_2+up-70,screenW_2+350,screenH_2+up+(count+1)*30,20,20,al_map_rgba(0,0,0,100));
 					al_draw_text(font,al_map_rgb(255,255,255),screenW_2-320,screenH_2+up-50,0,"Name");
 					al_draw_text(font,al_map_rgb(255,255,255),screenW_2,screenH_2+up-50,0,"Length");
 					al_draw_text(font,al_map_rgb(255,255,255),screenW_2+150,screenH_2+up-50,0,"Play Time");
@@ -427,7 +450,20 @@ int showLeaderBoard() {
 						al_draw_textf(font,al_map_rgb(255,255,255),screenW_2,screenH_2+up+30*i,0,"%d",records[i].score);
 						al_draw_textf(font,al_map_rgb(255,255,255),screenW_2+150,screenH_2+up+30*i,0,"%s",tmp);
 					}
+					al_draw_tinted_bitmap(Res.replayButton,al_map_rgba(127+tintColor,127+tintColor,127+tintColor,127+tintColor),
+										  screenW_2-(al_get_bitmap_width(Res.replayButton)>>1),screenH_2+110,0);
 					al_flip_display();
+				}
+				if(isMouseFocusOn) {
+					if(tintColor<125) {
+						tintColor+=3;
+						needRedraw = 1;
+					}
+				} else {
+					if(tintColor>0) {
+						tintColor-=3;
+						needRedraw = 1;
+					}
 				}
 				break;
 			case ALLEGRO_EVENT_DISPLAY_RESIZE:
@@ -518,7 +554,7 @@ int selectLevel(int levelNum) {
 			screenNeedRefresh=0;
 			al_clear_to_color(al_map_rgb(0,0,0));
 			al_draw_scaled_bitmap(Res.start,0,0,al_get_bitmap_width(Res.start),al_get_bitmap_height(Res.start)
-										  ,0,0,al_get_display_width(Res.display),al_get_display_height(Res.display),0);
+								  ,0,0,al_get_display_width(Res.display),al_get_display_height(Res.display),0);
 			drawButton(levelNum,button,font,mouseOnFont);
 			al_flip_display();
 		}

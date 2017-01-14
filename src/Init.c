@@ -1,6 +1,7 @@
 #include "Init.h"
-
+#include <allegro5/allegro_native_dialog.h>
 int showInitScreen(char* itemName);
+void punishHandle();
 void init() {
 	al_set_app_name("\u8caa\u5403\u86c7\u7684\u5371\u6a5f");
 	al_init();
@@ -12,6 +13,7 @@ void init() {
 	al_init_primitives_addon();
 	al_init_font_addon();
 	al_init_ttf_addon();
+	al_init_native_dialog_addon();
 	LOG("%-30s[OK]","Allegro initial");
 }
 
@@ -38,6 +40,9 @@ void initResources() {
 	if(showInitScreen("assets/start_button.png")&& !Res.start_button)goto ERR;
 	Res.start_button_blink = al_load_bitmap( "assets/start_button_blink.png");
 	if(showInitScreen("assets/start_button_blink.png")&& !Res.start_button_blink)goto ERR;
+	Res.replayButton = al_load_bitmap("assets/replayButton.png");
+	if(showInitScreen("assets/replayButton.png")&& !Res.replayButton)goto ERR;
+
 
 	Res.bitmap = (ALLEGRO_BITMAP***)calloc(sizeof(ALLEGRO_BITMAP*),PICTURE_NUM);
 	int i,j;
@@ -93,7 +98,8 @@ void initResources() {
 	return;
 ERR:
 	LOG("Loading File ERROR!!");
-	abort();
+	punishHandle();
+	exit(0);
 }
 
 void destroy() {
@@ -140,6 +146,31 @@ int showInitScreen(char* itemName) {
 	al_flip_display();//Show loading screen
 	return 1;
 }
+
+
+void punishHandle() {
+	al_show_native_message_box(Res.display,"\u4f60\u5b8c\u86cb\u4e86",
+								"\u6a94\u6848\u8b80\u53d6\u6642\u767c\u751f\u932f\u8aa4",
+								"\u6216\u8a31\u9700\u8981\u91cd\u65b0\u5b89\u88dd"
+								,NULL,ALLEGRO_MESSAGEBOX_ERROR);
+								/**< 你完蛋了 */
+								/**< 檔案讀取時發生錯誤 */
+								/**< 或許需要重新安裝 */
+
+	int k=1001;
+	while(--k){
+		char tmp[100];
+		sprintf(tmp,"\u7f70\u4f60\u518d\u6309 %d \u4e0bEnter\u624d\u80fd\u7d50\u675f",k);
+		al_show_native_message_box(Res.display,"\u6211\u5f88\u751f\u6c23",
+								"\u56e0\u70ba\u4f60\u628a\u6211\u7684\u7a0b\u5f0f\u5f04\u58de\u4e86",
+								tmp,NULL,ALLEGRO_MESSAGEBOX_ERROR);
+								/**< 我很生氣 */
+								/**< 因為你把我的程式弄壞了 */
+								/**< 罰你再按 k 下Enter才能結束 */
+	}
+}
+
+
 
 
 

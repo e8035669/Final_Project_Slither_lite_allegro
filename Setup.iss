@@ -15,8 +15,8 @@ AppSupportURL=http://www.example.com/
 AppUpdatesURL=http://www.example.com/
 DefaultDirName={pf}\Slither_Lite
 DisableProgramGroupPage=yes
-InfoBeforeFile=D:\CodeBlocks_HW\Final_Project_Slither_lite_allegro\CopyRight.md
 InfoAfterFile=D:\CodeBlocks_HW\Final_Project_Slither_lite_allegro\CopyRight.md
+LicenseFile=D:\CodeBlocks_HW\Final_Project_Slither_lite_allegro\CopyRight.md
 OutputBaseFilename=setup
 SetupIconFile=D:\CodeBlocks_HW\Final_Project_Slither_lite_allegro\assets\icon.ico
 Compression=lzma
@@ -24,7 +24,7 @@ SolidCompression=yes
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
-Name: "ChineseTraditional" ; MessagesFile: "compiler:Languages\Unofficial\ChineseTraditional.isl"
+Name: "ChineseTraditional" ; MessagesFile: "compiler:Languages\ChineseTraditional.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked

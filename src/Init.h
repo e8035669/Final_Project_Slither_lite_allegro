@@ -11,10 +11,11 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_primitives.h>
 
+
 struct _Resources {
 	ALLEGRO_DISPLAY* display;
 	ALLEGRO_FONT *pongFont,*builtinFont;
-	ALLEGRO_BITMAP *start,*start_button,*start_button_blink,*icon;
+	ALLEGRO_BITMAP *start,*start_button,*start_button_blink,*icon,*replayButton;
 	ALLEGRO_BITMAP ***bitmap,*snake_body,*snake_head,*lightspot;
 	ALLEGRO_TIMER* timer;
 	ALLEGRO_EVENT_QUEUE* eventQueue;
