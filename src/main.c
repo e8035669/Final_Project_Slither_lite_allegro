@@ -4,6 +4,7 @@
 #include <string.h>
 #include <assert.h>
 #include <omp.h>
+#include <windows.h>
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
@@ -175,9 +176,10 @@ int showMenu(char* retName) {
 					int dx = event.mouse.x-screenW_2+230;
 					int dy = event.mouse.y-screenH_2-118;
 					if(dx*dx+dy*dy<76*76) {
+						ShellExecute(NULL,NULL,
+									 "https://github.com/e8035669/Final_Project_Slither_lite_allegro/blob/master/CopyRight.md",
+									 NULL,NULL,SW_SHOWDEFAULT);
 						/**< 這裡放開啟copyright的txt檔!! */
-						retCode = -1;
-						isDone = 1;
 					}
 				}
 				{
@@ -215,8 +217,8 @@ int showMenu(char* retName) {
 						al_draw_bitmap(Res.leaderBoardButton,screenW_2-150+230,screenH_2, 0);
 					}
 					al_draw_textf(Res.pianpianFont,al_map_rgba(110,239,35,254),screenW_2,100,ALLEGRO_ALIGN_CENTRE,
-									"\u8acb\u8f38\u5165\u66b1\u7a31:");
-									/**< 請輸入暱稱 */
+								  "\u8acb\u8f38\u5165\u66b1\u7a31:");
+					/**< 請輸入暱稱 */
 					al_draw_textf(Res.pianpianFont,al_map_rgba(209,27,27,255),screenW_2,200,ALLEGRO_ALIGN_CENTER,"%s",name);
 					al_flip_display();
 				}

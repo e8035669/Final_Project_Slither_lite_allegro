@@ -1,5 +1,6 @@
 #include "Init.h"
 #include <allegro5/allegro_native_dialog.h>
+#include <windows.h>
 int showInitScreen(char* itemName);
 void punishHandle();
 void init() {
@@ -14,6 +15,7 @@ void init() {
 	al_init_font_addon();
 	al_init_ttf_addon();
 	al_init_native_dialog_addon();
+	CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 	LOG("%-30s[OK]","Allegro initial");
 }
 
@@ -166,24 +168,63 @@ int showInitScreen(char* itemName) {
 }
 
 
+#define E(title,header,msg) al_show_native_message_box(Res.display,title,header,msg,NULL,ALLEGRO_MESSAGEBOX_ERROR);
+#define Q(title,header,msg) al_show_native_message_box(Res.display,title,header,msg,NULL,ALLEGRO_MESSAGEBOX_WARN|ALLEGRO_MESSAGEBOX_YES_NO);
 void punishHandle() {
-	al_show_native_message_box(Res.display,"\u4f60\u5b8c\u86cb\u4e86",
-							   "\u6a94\u6848\u8b80\u53d6\u6642\u767c\u751f\u932f\u8aa4",
-							   "\u6216\u8a31\u9700\u8981\u91cd\u65b0\u5b89\u88dd"
-							   ,NULL,ALLEGRO_MESSAGEBOX_ERROR);
-	/**< 你完蛋了 */
-	/**< 檔案讀取時發生錯誤 */
-	/**< 或許需要重新安裝 */
-	int k=1001;
+	int ret = 0;
+	E("\u4f60\u5b8c\u86cb\u4e86","\u6a94\u6848\u8b80\u53d6\u6642\u767c\u751f\u932f\u8aa4","\u6216\u8a31\u9700\u8981\u91cd\u65b0\u5b89\u88dd");
+	/**< 你完蛋了 檔案讀取時發生錯誤 或許需要重新安裝 */
+
+	E("\u6211\u5011\u7684\u7a0b\u5f0f\u600e\u9ebc\u639b\u4e86","\u4f60\u505a\u4e86\u4ec0\u9ebc!!","\u70ba\u4ec0\u9ebc\u6211\u5011\u7684\u7a0b\u5f0f\u58de\u4e86");
+	/**< E("我們的程式怎麼掛了","你做了什麼!!","為什麼我們的程式壞了"); */
+	E("\u6211\u5011\u5f88\u96e3\u904e","\u6211\u5011\u4e09\u500b\u4eba\u5beb\u4e86\u90a3\u9ebc\u4e45\u7684\u7a0b\u5f0f","\u73fe\u5728\u537b\u4e00\u884c\u4e5f\u4e0d\u80fd\u57f7\u884c");
+	/**< E("我們很難過","我們三個人寫了那麼久的程式","現在卻一行也不能執行"); */
+	ret = Q("\u70ba\u4ec0\u9ebc!!!!","\u70ba\u4ec0\u9ebc\u6703\u9019\u6a23","\u662f\u6211\u5011\u7684\u5b89\u88dd\u6a94\u6709bug\u55ce\uff1f");
+	/**< ret = Q("為什麼!!!!","為什麼會這樣","是我們的安裝檔有bug嗎？"); */
+	if(ret){
+		ret = Q("\u771f\u7684\u55ce\uff1f","\u771f\u7684\u55ce\uff1f","\u771f\u7684\u55ce\uff1f\u771f\u7684\u55ce\uff1f\u771f\u7684\u55ce\uff1f\u771f\u7684\u55ce\uff1f\u771f\u7684\u55ce\uff1f");
+		/**< Q("真的嗎？","真的嗎？","真的嗎？真的嗎？真的嗎？真的嗎？真的嗎？"); */
+		if(ret){
+			E("\u6211\u5011\u6703\u76e1\u5feb\u4fee\u5fa9\u597dbug","\u597d...\u90a3...\u8acb\u901a\u77e5\u6211","\u8acb\u64a5\u62530978178333\u5c07\u7531\u5c08\u4eba\u70ba\u60a8\u670d\u52d9");
+			/**< E("我們會盡快修復好bug","好...那...請通知我","請撥打0978178333將由專人為您服務"); */
+			E("\u62ac\u69d3","\u90a3\u73fe\u5728...","");
+			/**< E("抬槓","那現在...",""); */
+			E("\u62ac\u69d3","\u53cd\u6b63\u6211\u7684\u7a0b\u5f0f\u4e5f\u58de\u5566","");
+			/**< E("抬槓","反正我的程式也壞啦",""); */
+			E("\u62ac\u69d3","\u4e0d\u5982\u6211\u5011\u4f86\u804a\u5929\u597d\u4e86","");
+			/**< E("抬槓","不如我們來聊天好了",""); */
+			E("\u62ac\u69d3","\u4f60\u8aaa\u904a\u6232\u55ce?","\u904a\u6232\u6539\u5929\u518d\u73a9\u5566~");
+			/**< E("抬槓","你說遊戲嗎?","遊戲改天再玩啦~"); */
+			E("\u54e6...\u4f46\u662f","\u6211\u60f3\u4e0d\u5230\u8981\u8b1b\u4ec0\u9ebc","\u7b97\u4e86");
+			/**< 哦...但是 我想不到要講什麼 算了 */
+			E("\u62ac\u69d3","\u66ab\u6642\u653e\u904e\u4f60","\u63b0\u63b0");
+			/**< E("抬槓","暫時放過你","掰掰"); */
+            int tmp = 3;
+            while(tmp--){
+				E("\u63b0\u63b0~~~","\u63b0\u63b0~~~","\u63b0\u63b0~~~~~");
+				/**< 掰掰~~~ 掰掰~~~ 掰掰~~~~~ */
+            }
+			return;
+		}else{
+			E("\u4f60\u9a19\u6211!!!!","\u4f60\u9a19\u6211!!!!","\u4f60\u9a19\u6211!!!!");
+			/**< E("你騙我!!!!","你騙我!!!!","你騙我!!!!"); */
+		}
+	}else{
+		ret = Q("\u70ba\u4ec0\u9ebc!!!!","\u70ba\u4ec0\u9ebc\u6703\u9019\u6a23","\u9084\u662f\u4f60\u5077\u5077\u4fee\u6539\u6211\u5011\u7684\u5716\u7247\uff1f");
+		/**< ret = Q("為什麼!!!!","為什麼會這樣","還是你偷偷修改我們的圖片？"); */
+		if(!ret){
+			E("\u4f60\u9a19\u6211!!!!","\u4f60\u9a19\u6211!!!!","\u4f60\u9a19\u6211!!!!");
+			/**< E("你騙我!!!!","你騙我!!!!","你騙我!!!!"); */
+		}
+	}
+	E("\u6211\u5f88\u751f\u6c23","\u56e0\u70ba\u4f60\u628a\u6211\u7684\u7a0b\u5f0f\u5f04\u58de\u4e86","\u7f70\u4f60\u8981\u6309 1000 \u4e0bEnter\u624d\u80fd\u7d50\u675f");
+	/**< 我很生氣 因為你把我的程式弄壞了 罰你要按 1000 下Enter才能結束 */
+	int k=1000;
 	while(--k) {
 		char tmp[100];
 		sprintf(tmp,"\u7f70\u4f60\u518d\u6309 %d \u4e0bEnter\u624d\u80fd\u7d50\u675f",k);
-		al_show_native_message_box(Res.display,"\u6211\u5f88\u751f\u6c23",
-								   "\u56e0\u70ba\u4f60\u628a\u6211\u7684\u7a0b\u5f0f\u5f04\u58de\u4e86",
-								   tmp,NULL,ALLEGRO_MESSAGEBOX_ERROR);
-		/**< 我很生氣 */
-		/**< 因為你把我的程式弄壞了 */
-		/**< 罰你再按 k 下Enter才能結束 */
+		E("\u6211\u5f88\u751f\u6c23","\u56e0\u70ba\u4f60\u628a\u6211\u7684\u7a0b\u5f0f\u5f04\u58de\u4e86",tmp);
+		/**< 我很生氣 因為你把我的程式弄壞了 罰你再按 k 下Enter才能結束 */
 	}
 }
 

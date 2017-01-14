@@ -10,13 +10,20 @@
 				<Option output="bin/Debug/Final_Project_Slither_lite_allegro" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="0" />
-				<Option compiler="mingw_with_allegro_5211_dynamic" />
-				<Compiler>
-					<Add option="-fopenmp" />
-				</Compiler>
-				<Linker>
-					<Add option="-lgomp" />
-				</Linker>
+				<Option compiler="mingw_with_allegro_5211" />
+				<Option projectCompilerOptionsRelation="-1" />
+				<Option projectLinkerOptionsRelation="-1" />
+				<Option projectIncludeDirsRelation="-1" />
+				<Option projectResourceIncludeDirsRelation="-1" />
+				<Option projectLibDirsRelation="-1" />
+				<MakeCommands>
+					<Build command="" />
+					<CompileFile command="" />
+					<Clean command="" />
+					<DistClean command="" />
+					<AskRebuildNeeded command="" />
+					<SilentBuild command=" &gt; $(CMD_NULL)" />
+				</MakeCommands>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Final_Project_Slither_lite_allegro" prefix_auto="1" extension_auto="1" />
