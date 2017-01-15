@@ -295,6 +295,8 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 	/**< 殺蛇幾隻 一隻加1000分 */
 	int killCount = 0;
 
+	int remainSnakes = 0;
+
 	al_flush_event_queue(Res.eventQueue);
 
 
@@ -381,15 +383,21 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 						oldFPS = FPS;
 						FPS = 0;
 						mapUpdateLightSpotData(map);
+						int k;
+						remainSnakes = 0;
+						for(k=1; k<Ainumbers; k++) {
+							if(!(snakes[k]->isDead))remainSnakes++;
+						}
 					}
 
-					if(al_is_event_queue_empty(Res.eventQueue)&&FPS>59) {
+					if(al_is_event_queue_empty(Res.eventQueue)&&oldFPS>59) {
 						//*< 死掉會復活 */
-						if(event.timer.count%6==0) {
+						int k=50;
+						while(k--){
 							Snake_rebirth(snakes,Ainumbers);
 						}
 						//*< 有機率增加亮點 */
-						if(rand()%100 < 10) {
+						if(rand()%100 < 30) {
 							Put_LightSpot(map,Create_LightSpot(map->size));
 						}
 					}
@@ -476,8 +484,8 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 				Draw_Snake(snakes[i],Res.snake_body,Res.snake_head,Res.display,snakes[keyIn_int]->head->current_position);
 			}
 			al_draw_textf(Res.builtinFont,al_map_rgb(255,0,0),0,al_get_display_height(Res.display)-8,0,
-						  "FPS:%d Pos(%.0f,%.0f) Length:%d Lsp:%d LspSize:%d",
-						  oldFPS,snake->head->current_position.x,snake->head->current_position.y,snake->length,map->totalLightSpotLength,map->totalLightSpotSize);
+						  "FPS:%d Pos(%.0f,%.0f) Length:%d Lsp:%d LspSize:%d remainSnake:%d",
+						  oldFPS,snake->head->current_position.x,snake->head->current_position.y,snake->length,map->totalLightSpotLength,map->totalLightSpotSize,remainSnakes);
 			al_draw_textf(Res.builtinFont,al_map_rgb(255,0,0),al_get_display_width(Res.display)-80,al_get_display_height(Res.display)-8,0,
 						  "snakes:%d",keyIn_int);
 			if(userControl) {
@@ -675,7 +683,7 @@ int selectLevel(int levelNum) {
 						button[i].startY=frameH*((i/maxLevelRow)+1.0/4);
 					}
 					screenNeedRefresh=1;
-				}else if(event.keyboard.keycode==ALLEGRO_KEY_F12) {
+				} else if(event.keyboard.keycode==ALLEGRO_KEY_F12) {
 					/**< Screen shot */
 					ALLEGRO_BITMAP* screenshot = al_create_bitmap(al_get_display_width(Res.display),al_get_display_height(Res.display));
 					al_set_target_bitmap(screenshot);
