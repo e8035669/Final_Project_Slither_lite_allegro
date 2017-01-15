@@ -31,6 +31,9 @@ VersionInfoTextVersion=V1.0.0
 VersionInfoProductName=³g¦Y³Dªº¦M¾÷
 VersionInfoProductVersion=1.0.0
 VersionInfoProductTextVersion=V1.0.0
+WizardSmallImageFile=D:\CodeBlocks_HW\Final_Project_Slither_lite_allegro\assets\icon.bmp
+WizardImageBackColor=clWhite
+WizardImageFile=D:\CodeBlocks_HW\Final_Project_Slither_lite_allegro\wizmodernimage.bmp
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
