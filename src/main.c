@@ -139,6 +139,17 @@ int showMenu(char* retName) {
 					screenH_2 = al_get_display_height(Res.display)>>1;
 					screenW_2 = al_get_display_width(Res.display)>>1;
 					isDisplayNeedRefresh = 1;
+				} else if(event.keyboard.keycode==ALLEGRO_KEY_F12) {
+					/**< Screen shot */
+					ALLEGRO_BITMAP* screenshot = al_create_bitmap(al_get_display_width(Res.display),al_get_display_height(Res.display));
+					al_set_target_bitmap(screenshot);
+					al_draw_bitmap(al_get_backbuffer(Res.display),0,0,0);
+					al_set_target_backbuffer(Res.display);
+					char tmp[50] = {0};
+					time_t currtime = time(NULL);
+					strftime(tmp,50,"screenshot/%Y_%m_%d_%H_%M_%S.bmp",localtime(&currtime));
+					al_save_bitmap(tmp,screenshot);
+					al_destroy_bitmap(screenshot);
 				}
 				break;
 			case ALLEGRO_EVENT_MOUSE_AXES: {
@@ -372,7 +383,7 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 						mapUpdateLightSpotData(map);
 					}
 
-					if(oldFPS>59) {
+					if(al_is_event_queue_empty(Res.eventQueue)&&FPS>59) {
 						//*< ¦º±¼·|´_¬¡ */
 						if(event.timer.count%6==0) {
 							Snake_rebirth(snakes,Ainumbers);
@@ -436,6 +447,17 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 						al_set_display_flag(Res.display,ALLEGRO_FULLSCREEN_WINDOW,TRUE);
 					}
 					isDisplayNeedRefresh = 1;
+				} else if(event.keyboard.keycode==ALLEGRO_KEY_F12) {
+					/**< Screen shot */
+					ALLEGRO_BITMAP* screenshot = al_create_bitmap(al_get_display_width(Res.display),al_get_display_height(Res.display));
+					al_set_target_bitmap(screenshot);
+					al_draw_bitmap(al_get_backbuffer(Res.display),0,0,0);
+					al_set_target_backbuffer(Res.display);
+					char tmp[50] = {0};
+					time_t currtime = time(NULL);
+					strftime(tmp,50,"screenshot/%Y_%m_%d_%H_%M_%S.bmp",localtime(&currtime));
+					al_save_bitmap(tmp,screenshot);
+					al_destroy_bitmap(screenshot);
 				}
 				break;
 			case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -463,6 +485,7 @@ int mainGameLoop(char* name,int Ainumbers,int lightspot,void (*aiExec)(Snake** s
 			} else {
 				al_draw_text(Res.builtinFont,al_map_rgb(255,0,0),0,0,0,"observe mode");
 			}
+
 			al_flip_display();
 		}
 
@@ -511,6 +534,19 @@ int showLeaderBoard() {
 						screenH_2 = al_get_display_height(Res.display)>>1;
 						screenW_2 = al_get_display_width(Res.display)>>1;
 						needRedraw = 1;
+						break;
+					case ALLEGRO_KEY_F12: {
+							/**< Screen shot */
+							ALLEGRO_BITMAP* screenshot = al_create_bitmap(al_get_display_width(Res.display),al_get_display_height(Res.display));
+							al_set_target_bitmap(screenshot);
+							al_draw_bitmap(al_get_backbuffer(Res.display),0,0,0);
+							al_set_target_backbuffer(Res.display);
+							char tmp[50] = {0};
+							time_t currtime = time(NULL);
+							strftime(tmp,50,"screenshot/%Y_%m_%d_%H_%M_%S.bmp",localtime(&currtime));
+							al_save_bitmap(tmp,screenshot);
+							al_destroy_bitmap(screenshot);
+						}
 						break;
 				}
 				break;
@@ -599,6 +635,7 @@ int selectLevel(int levelNum) {
 
 	if(maxLevelRow*maxLevelCol < levelNum) {
 		LOG("button level number error");
+		free(button);
 		return -1;
 	}
 
@@ -638,6 +675,17 @@ int selectLevel(int levelNum) {
 						button[i].startY=frameH*((i/maxLevelRow)+1.0/4);
 					}
 					screenNeedRefresh=1;
+				}else if(event.keyboard.keycode==ALLEGRO_KEY_F12) {
+					/**< Screen shot */
+					ALLEGRO_BITMAP* screenshot = al_create_bitmap(al_get_display_width(Res.display),al_get_display_height(Res.display));
+					al_set_target_bitmap(screenshot);
+					al_draw_bitmap(al_get_backbuffer(Res.display),0,0,0);
+					al_set_target_backbuffer(Res.display);
+					char tmp[50] = {0};
+					time_t currtime = time(NULL);
+					strftime(tmp,50,"screenshot/%Y_%m_%d_%H_%M_%S.bmp",localtime(&currtime));
+					al_save_bitmap(tmp,screenshot);
+					al_destroy_bitmap(screenshot);
 				}
 				break;
 			case ALLEGRO_EVENT_DISPLAY_RESIZE:

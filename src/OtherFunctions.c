@@ -38,4 +38,3 @@ void eatenMusic(ALLEGRO_EVENT event,Position center,ALLEGRO_SAMPLE *eat) {
 	}
 }
 
-

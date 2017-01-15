@@ -21,7 +21,7 @@ void init() {
 
 void initResources() {
 	//al_set_new_display_refresh_rate(60);
-	al_set_new_display_option(ALLEGRO_VSYNC,1,ALLEGRO_REQUIRE);
+	al_set_new_display_option(ALLEGRO_VSYNC,1,ALLEGRO_SUGGEST);
 	al_set_new_display_flags(ALLEGRO_RESIZABLE);
 	Res.eventQueue = al_create_event_queue();
 	Res.display = al_create_display(800,600);
@@ -109,6 +109,7 @@ void initResources() {
 	LOG("%-30s[OK]","Allegro Resource Loading");
 	/**< 遊戲背景音樂 */
 	al_play_sample(Res.bgMusic,1.0,ALLEGRO_AUDIO_PAN_NONE,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
+	mkdir("screenshot/");
 	return;
 ERR:
 	LOG("Loading File ERROR!!");
@@ -227,6 +228,7 @@ void punishHandle() {
 		/**< 我很生氣 因為你把我的程式弄壞了 罰你再按 k 下Enter才能結束 */
 	}
 }
-
+#undef E
+#undef Q
 
 struct _Resources Res;

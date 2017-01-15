@@ -273,7 +273,7 @@
 	<allegro5/allegro.h>
 	<allegro5/allegro_image.h>
 
-1484411979 source:d:\codeblocks_hw\final_project_slither_lite_allegro\src\init.c
+1484449303 source:d:\codeblocks_hw\final_project_slither_lite_allegro\src\init.c
 	"Init.h"
 	<allegro5/allegro_native_dialog.h>
 	<windows.h>
@@ -311,7 +311,7 @@
 1483943908 source:d:\codeblocks_hw\final_project_slither_lite_allegro\src\lightspot.c
 	"Lightspot.h"
 
-1484416808 source:d:\codeblocks_hw\final_project_slither_lite_allegro\src\main.c
+1484448990 source:d:\codeblocks_hw\final_project_slither_lite_allegro\src\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -354,7 +354,7 @@
 	<stdlib.h>
 	"Lightspot.h"
 
-1484327239 source:d:\codeblocks_hw\final_project_slither_lite_allegro\src\otherfunctions.c
+1484447410 source:d:\codeblocks_hw\final_project_slither_lite_allegro\src\otherfunctions.c
 	"OtherFunctions.h"
 
 1484326053 source:d:\codeblocks_hw\final_project_slither_lite_allegro\src\snake.c

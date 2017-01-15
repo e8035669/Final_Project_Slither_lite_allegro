@@ -11,11 +11,14 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="0" />
 				<Option compiler="mingw_with_allegro_5211" />
-				<Option projectCompilerOptionsRelation="-1" />
-				<Option projectLinkerOptionsRelation="-1" />
 				<Option projectIncludeDirsRelation="-1" />
-				<Option projectResourceIncludeDirsRelation="-1" />
 				<Option projectLibDirsRelation="-1" />
+				<Compiler>
+					<Add option="-fopenmp" />
+				</Compiler>
+				<Linker>
+					<Add option="-lgomp" />
+				</Linker>
 				<MakeCommands>
 					<Build command="" />
 					<CompileFile command="" />
